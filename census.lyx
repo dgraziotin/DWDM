@@ -1,5 +1,5 @@
-#LyX 2.0.0alpha6 created this file. For more info see http://www.lyx.org/
-\lyxformat 400
+#LyX 2.0.0beta1 created this file. For more info see http://www.lyx.org/
+\lyxformat 407
 \begin_document
 \begin_header
 \textclass article
@@ -36,6 +36,7 @@
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\use_refstyle 0
 \index Index
 \shortcut idx
 \color #008000
@@ -56,8 +57,60 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Blah
+\end_layout
 
+\begin_layout Author
+Daniel, Daniel, Thomas
+\end_layout
+
+\begin_layout Date
+October / November 2010
+\end_layout
+
+\begin_layout Section
+Data Examination
+\end_layout
+
+\begin_layout Subsection
+Blood Transfusion
+\end_layout
+
+\begin_layout Subsection
+Census Income
+\end_layout
+
+\begin_layout Section
+Theoretical Background
+\end_layout
+
+\begin_layout Subsection
+Preprocessing blah
+\end_layout
+
+\begin_layout Subsection
+Preprocessing lol
+\end_layout
+
+\begin_layout Subsection
+Algo 1
+\end_layout
+
+\begin_layout Subsection
+Algo 2
+\end_layout
+
+\begin_layout Section
+Analysis of Techniques
+\end_layout
+
+\begin_layout Subsection
+Blood Transfusion
+\end_layout
+
+\begin_layout Subsection
+Census Income
 \end_layout
 
 \end_body
