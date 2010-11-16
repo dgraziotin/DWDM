@@ -24,9 +24,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \use_mhchem 1
@@ -41,6 +42,10 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -81,28 +86,327 @@ Blood Transfusion
 Census Income
 \end_layout
 
+\begin_layout Standard
+The dataset contains 15 attributes and a total of 32561 instance.
+ The following is a representation of the attributes and their types, extracted
+ from the ARFF file:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+age NUMERIC 
+\end_layout
+
+\begin_layout Plain Layout
+
+workclass {Private, Self-emp-not-inc, Federal-gov, [..], Never-worked}  
+\end_layout
+
+\begin_layout Plain Layout
+
+fnlwgt NUMERIC
+\end_layout
+
+\begin_layout Plain Layout
+
+education {Bachelors, Some-college, [..], Preschool}  
+\end_layout
+
+\begin_layout Plain Layout
+
+education-num NUMERIC  
+\end_layout
+
+\begin_layout Plain Layout
+
+marital-status {Married-civ-spouse, Divorced, [..], Married-AF-spouse}
+\end_layout
+
+\begin_layout Plain Layout
+
+occupation {Tech-support, Craft-repair, [..], Armed-Forces}  
+\end_layout
+
+\begin_layout Plain Layout
+
+relationship {Wife, Own-child, Husband, [..], Unmarried}  
+\end_layout
+
+\begin_layout Plain Layout
+
+race	 {White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black} 
+\end_layout
+
+\begin_layout Plain Layout
+
+sex 	{Female, Male}  
+\end_layout
+
+\begin_layout Plain Layout
+
+capital-gain NUMERIC
+\end_layout
+
+\begin_layout Plain Layout
+
+capital-loss NUMERIC
+\end_layout
+
+\begin_layout Plain Layout
+
+hours-per-week NUMERIC
+\end_layout
+
+\begin_layout Plain Layout
+
+native-country {United-States, Cambodia, England, [..]}  
+\end_layout
+
+\begin_layout Plain Layout
+
+class 	{ >50K, <=50K}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Education and Education-Num seems are referring to the same value, where
+ education-num is a numerical representation of education.
+\end_layout
+
+\begin_layout Standard
+Attribute fnlwgt does not appear to make any sense and will be ignored.
+ 
+\end_layout
+
+\begin_layout Standard
+There are missing values for attributes workclass (6%), occupation (6%),
+ native-country (2%).
+ Two possible strategies to deal with the missing values are complete removal
+ of the instances having missing values and substitution of the missing
+ values with the mode value of the attribute.
+ Both of them will be analyzed.
+\end_layout
+
+\begin_layout Standard
+The two attributes age and hours-per-week have been selected.
+ The following are their boxplot representation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/census-distribution_age.jpg
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/census-distribution_hours_per_week.jpg
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are outliers for both the selected attributes.
+ They will be treated with discretization techniques.
+\end_layout
+
+\begin_layout Standard
+Data similarity: 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Take it from slides!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Data mining tasks: an interesting task could focus around the income class.
+ For example we could construct a tree which tells us if a 20-24 or a 25-30
+ years old with different work class can be mapped in a >50K income class.
+\end_layout
+
+\begin_layout Standard
+E.G Age + Work => Class income: >50K /<=50K 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/census-example_tree.jpg
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Theoretical Background
 \end_layout
 
-\begin_layout Subsection
-Preprocessing blah
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Use D.H.
+ work on doc
 \end_layout
 
-\begin_layout Subsection
-Preprocessing lol
-\end_layout
+\end_inset
 
-\begin_layout Subsection
-Algo 1
-\end_layout
 
-\begin_layout Subsection
-Algo 2
 \end_layout
 
 \begin_layout Section
 Analysis of Techniques
+\end_layout
+
+\begin_layout Standard
+For analyzing the classification algorithms, we decided to prepare an evaluation
+ framework containing variables commonly adjustable with each algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+For preparing it, we first decided how to pre-process the data that can
+ be evaluated by all four algorithms.
+ All other settings not commonly shared by the algorithms will be kept to
+ the values that Weka proposes.
+ Further experimenting with the single algorithms will be performed in the
+ next section.
+\end_layout
+
+\begin_layout Subsubsection*
+Missing Values and Outliers
+\end_layout
+
+\begin_layout Standard
+We decided to simply substitute the missing values of instances with the
+ mode value of each attribute, as the method of removing instances is discourage
+d.
+ Outliers will be treated by applying discretization.
+\end_layout
+
+\begin_layout Subsubsection*
+Chosen Datasets
+\end_layout
+
+\begin_layout Standard
+We will use the four algorithms on both the supplied data sets at full.
+\end_layout
+
+\begin_layout Subsubsection*
+Attribute Selection
+\end_layout
+
+\begin_layout Standard
+There will be three approaches for attribute selection.
+ We will first apply the algorithms on the data sets with all supplied attribute
+s, we will then remove the attributes that we think are not useful for the
+ sake of this inquiry and we will then let Weka choose which attributes
+ to remove by using the Information Gain measure.
+\end_layout
+
+\begin_layout Paragraph
+Approach
+\end_layout
+
+\begin_layout Standard
+The framework will be run as described in this paragraph.
+ The four classification models will be run in this ways:
+\end_layout
+
+\begin_layout Enumerate
+Without any other preprocessing techniques
+\end_layout
+
+\begin_layout Enumerate
+By treating outliers and substituting missing values
+\end_layout
+
+\begin_layout Enumerate
+By selecting attributes 
+\end_layout
+
+\begin_layout Enumerate
+By treating outliers, substituting missing values and selecting attributes
 \end_layout
 
 \begin_layout Subsection
@@ -111,6 +415,10 @@ Blood Transfusion
 
 \begin_layout Subsection
 Census Income
+\end_layout
+
+\begin_layout Subsubsection*
+Classification algorithms
 \end_layout
 
 \end_body
