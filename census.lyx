@@ -321,13 +321,9 @@ Theoretical Background
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Use D.H.
- work on doc
-\end_layout
+\begin_inset External
+	template PDFPages
+	filename ClassificationAlgorithms.pdf
 
 \end_inset
 
@@ -415,6 +411,36 @@ Blood Transfusion
 
 \begin_layout Subsection
 Census Income
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Make nice tables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1: J48 87.8566 %; NaiveBayes 83.4465 %; Logistics 84.896 %; k-nearest neighbour:
+ 99.9969 %
+\end_layout
+
+\begin_layout Standard
+2:
+\end_layout
+
+\begin_layout Standard
+3:
+\end_layout
+
+\begin_layout Standard
+4:
 \end_layout
 
 \begin_layout Subsubsection*
