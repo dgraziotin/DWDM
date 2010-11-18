@@ -419,12 +419,14 @@ ns presented in the previous paragraph.
  performed better.
  We also enclosed in square brackets the best performing algorithm for each
  run.
+ For steps 1,2,3 and 4 we also used different values for k parameter, as
+ the results would not change otherwise.
 \end_layout
 
 \begin_layout Enumerate
-J48 87.8566%; NaiveBayes 83.4465%; Logistics 84.896%; 
-\color blue
-k-nearest neighbour: 99.9969%
+J48 87.8566%; NaiveBayes 83.4465%; Logistics 84.896%;
+\color black
+ k-nearest neighbour (k=400): 85.3482%
 \end_layout
 
 \begin_layout Enumerate
@@ -432,9 +434,9 @@ k-nearest neighbour: 99.9969%
 \color green
 J48 88.0102%
 \color inherit
-; NaiveBayes 83.3144%; Logistics 84.896%; 
-\color blue
-k-nearest neighbour: 99.9969%
+; NaiveBayes 83.3144%; Logistics 84.896%;
+\color black
+ k-nearest neighbour: (k=10): 85.9065%
 \end_layout
 
 \begin_layout Enumerate
@@ -446,8 +448,8 @@ NaiveBayes 83.4557%
 \series bold
 ; 
 \series default
-\color blue
-k-nearest neighbour: 99.9969%
+\color black
+k-nearest neighbour (k=7): 86.8063%
 \end_layout
 
 \begin_layout Enumerate
@@ -457,17 +459,17 @@ J48 88.0102%
 \color inherit
 ; NaiveBayes 83.2837%; Logistics 84.896%; 
 \color blue
-k-nearest neighbour: 99.9969%
+k-nearest neighbour (k=2): 89.9665%
 \end_layout
 
 \begin_layout Enumerate
-J48 87.0858%; NaiveBayes 82.4729%; Logistics 85.1663%; k-nearest neighbour:
- 97.515%
+J48 87.0858%; NaiveBayes 82.4729%; Logistics 85.1663%; k-nearest neighbour
+ (k=2): 89.8222%
 \end_layout
 
 \begin_layout Enumerate
-J48 87.1380%; NaiveBayes 82.3193%; Logistics 85.1663%; k-nearest neighbour:
- 97.5615%
+J48 87.1380%; NaiveBayes 82.3193%; Logistics 85.1663%; k-nearest neighbour
+ (k=2): 89.856%
 \end_layout
 
 \begin_layout Enumerate
@@ -475,7 +477,7 @@ J48 85.1172%; NaiveBayes 81.1032%;
 \color red
 Logistics 85.326%
 \color inherit
-; k-nearest neighbour: 92.9179%
+; k-nearest neighbour (k=2): 87.1042%
 \end_layout
 
 \begin_layout Enumerate
@@ -483,11 +485,11 @@ J48 85.1172%; NaiveBayes 80.9588%;
 \color red
 Logistics 85.326%
 \color inherit
-; k-nearest neighbour 92.9517%
+; k-nearest neighbour (k=2): 87.0643%
 \end_layout
 
 \begin_layout Standard
-K-nn (k=1) has been the most well-performing algorithm in general.
+K-nn (k=2) has been the most well-performing algorithm in general.
 \end_layout
 
 \begin_layout Section*
