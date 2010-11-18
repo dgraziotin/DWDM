@@ -24,9 +24,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \use_mhchem 1
@@ -41,6 +42,10 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -77,6 +82,187 @@ Data Examination
 Blood Transfusion
 \end_layout
 
+\begin_layout Standard
+This data set was collected at the Blood Transfusion Service Center in Hsin-Chu
+ City in Taiwan.
+ The data is collected randomly from donors and is used to achieve a Frequency-M
+etric-Model of donations focusing on the donor’s situation, namely on the
+ amount of done donations before, of the total amount of donations and so
+ on, for a total of 748 instances and 5 attributes.
+ The data collected is focused on March 2007, since one attribute collects
+ exactly if one person donated in March 2007 or not.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Recency(months) NUMERIC - months since last donation 
+\end_layout
+
+\begin_layout Plain Layout
+
+Frequency(times) NUMERIC - total number of donation 
+\end_layout
+
+\begin_layout Plain Layout
+
+Monetary(c.c.blood) NUMERIC - total blood donated in c.c.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+Time(months) NUMERIC - months since first donation 
+\end_layout
+
+\begin_layout Plain Layout
+
+donatedmarch2007 NUMERIC - donated blood in March 2007 (1=donating blood;
+ 0=not donating blood)
+\end_layout
+
+\end_inset
+
+There are no missing values in the Dataset.
+ As derivable from the Boxplots (Figure 1) in both collected values there
+ are Positive outliers.
+ For the Monetary (Figure 1, on the right) Boxplot we can say that the values
+ are located in a very short range, by noticing that the whiskers are just
+ below/above the box ranges.
+ Outliers are present in both choosen attributes and they will be trated
+ by applying discretization.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/blood-distribution-frequency.png
+	lyxscale 50
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \space{}
+\end_inset
+
+
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/blood-distribution-monetary.png
+	lyxscale 50
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Frequency and Monetary Distribution
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+But how can we compute the similarity between the data objects according
+ to the attribute types of your datasets? Since all values (except the binary
+ value for doing transfusion in march 07) in this dataset are numeric ones,
+ to compare on similarity we can calculate the distance using the Minkowski
+ distance, by first cleaning up the data by bringing attributes to a unit-less
+ form.
+\end_layout
+
+\begin_layout Standard
+For this dataset we will introduce a class big and small donator, in order
+ to know if someone is a influent donator or not, on the base of the time
+ slot since the first donation and the frequency of dontations.
+ So, we can build a classifier applying the following rooles: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+If TIME(time since first donation)>49 & FREQ(freq.
+ of donation)>24 THEN BIG 
+\end_layout
+
+\begin_layout Plain Layout
+
+If TIME(time since first donation)<=49 & FREQ(freq.
+ of donation)>11 THEN BIG 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Census Income
 \end_layout
@@ -107,6 +293,96 @@ Analysis of Techniques
 
 \begin_layout Subsection
 Blood Transfusion
+\end_layout
+
+\begin_layout Subsubsection*
+Decision Tree
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-decision-tree.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Naïve Bayesian Classifier
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-bayesian.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Logistic Regression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-logistic-regression.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+KNN Classifier (KNN = 1)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-knn1.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+KNN Classifier (KNN = 3)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-knn3.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+KNN Classifier (KNN = 5)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename img/blood-knn5.png
+	lyxscale 50
+	scale 60
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
