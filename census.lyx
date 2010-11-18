@@ -63,15 +63,23 @@
 \begin_body
 
 \begin_layout Title
-Blah
+Data Mining Classification Algorithms: an analysis
 \end_layout
 
 \begin_layout Author
-Daniel, Daniel, Thomas
+Daniel Hanspeter 6129, Daniel Graziotin 4801, Thomas Schievenin 5701
 \end_layout
 
 \begin_layout Date
 October / November 2010
+\end_layout
+
+\begin_layout Abstract
+Blah blah blah a couple of words regarding the choice of the two datasets.
+ Blood transfusion missing class, for testing prediction.
+ Census Income has class, good for benchmarking classification techniques.
+ Expand this! Talk about sections, summary of one page of the four algorithms
+ as last page
 \end_layout
 
 \begin_layout Section
@@ -317,20 +325,6 @@ E.G Age + Work => Class income: >50K /<=50K
 \end_layout
 
 \begin_layout Section
-Theoretical Background
-\end_layout
-
-\begin_layout Standard
-\begin_inset External
-	template PDFPages
-	filename ClassificationAlgorithms.pdf
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
 Analysis of Techniques
 \end_layout
 
@@ -368,18 +362,6 @@ Chosen Datasets
 We will use the four algorithms on both the supplied data sets at full.
 \end_layout
 
-\begin_layout Subsubsection*
-Attribute Selection
-\end_layout
-
-\begin_layout Standard
-There will be three approaches for attribute selection.
- We will first apply the algorithms on the data sets with all supplied attribute
-s, we will then remove the attributes that we think are not useful for the
- sake of this inquiry and we will then let Weka choose which attributes
- to remove by using the Information Gain measure.
-\end_layout
-
 \begin_layout Paragraph
 Approach
 \end_layout
@@ -394,57 +376,136 @@ Without any other preprocessing techniques
 \end_layout
 
 \begin_layout Enumerate
+By substituting missing values
+\end_layout
+
+\begin_layout Enumerate
+By treating outliers
+\end_layout
+
+\begin_layout Enumerate
 By treating outliers and substituting missing values
 \end_layout
 
 \begin_layout Enumerate
-By selecting attributes 
+By removing fnlwgt and education-num
 \end_layout
 
 \begin_layout Enumerate
-By treating outliers, substituting missing values and selecting attributes
+Removing fnlwgt, education-num, substituting missing values
 \end_layout
 
-\begin_layout Subsection
-Blood Transfusion
+\begin_layout Enumerate
+Removing fnlwgt, education-num, treating outliers
 \end_layout
 
-\begin_layout Subsection
-Census Income
+\begin_layout Enumerate
+Removing fnlwgt, education-num, substituting missing values, treating outliers
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Make nice tables
+The best options for each classification algorithm will be chosen and used
+ for further experiments.
 \end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+The following is the list of the results of the tests run using the configuratio
+ns presented in the previous paragraph.
+ We highlighted with different colors the casistics in which each algorithm
+ performed better.
+ We also enclosed in square brackets the best performing algorithm for each
+ run.
+\end_layout
+
+\begin_layout Enumerate
+J48 87.8566%; NaiveBayes 83.4465%; Logistics 84.896%; 
+\color blue
+k-nearest neighbour: 99.9969%
+\end_layout
+
+\begin_layout Enumerate
+
+\color green
+J48 88.0102%
+\color inherit
+; NaiveBayes 83.3144%; Logistics 84.896%; 
+\color blue
+k-nearest neighbour: 99.9969%
+\end_layout
+
+\begin_layout Enumerate
+J48 87.8566%; 
+\color magenta
+NaiveBayes 83.4557%
+\color inherit
+; Logistics 84.896%
+\series bold
+; 
+\series default
+\color blue
+k-nearest neighbour: 99.9969%
+\end_layout
+
+\begin_layout Enumerate
+
+\color green
+J48 88.0102%
+\color inherit
+; NaiveBayes 83.2837%; Logistics 84.896%; 
+\color blue
+k-nearest neighbour: 99.9969%
+\end_layout
+
+\begin_layout Enumerate
+J48 87.0858%; NaiveBayes 82.4729%; Logistics 85.1663%; k-nearest neighbour:
+ 97.515%
+\end_layout
+
+\begin_layout Enumerate
+J48 87.1380%; NaiveBayes 82.3193%; Logistics 85.1663%; k-nearest neighbour:
+ 97.5615%
+\end_layout
+
+\begin_layout Enumerate
+J48 85.1172%; NaiveBayes 81.1032%; 
+\color red
+Logistics 85.326%
+\color inherit
+; k-nearest neighbour: 92.9179%
+\end_layout
+
+\begin_layout Enumerate
+J48 85.1172%; NaiveBayes 80.9588%; 
+\color red
+Logistics 85.326%
+\color inherit
+; k-nearest neighbour 92.9517%
+\end_layout
+
+\begin_layout Standard
+K-nn (k=1) has been the most well-performing algorithm in general.
+\end_layout
+
+\begin_layout Section*
+Conclusions
+\end_layout
+
+\begin_layout Standard
+blah blah
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename /Users/bodom_lx/Projects/DWDM/ClassificationAlgorithms.pdf
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-1: J48 87.8566 %; NaiveBayes 83.4465 %; Logistics 84.896 %; k-nearest neighbour:
- 99.9969 %
-\end_layout
-
-\begin_layout Standard
-2:
-\end_layout
-
-\begin_layout Standard
-3:
-\end_layout
-
-\begin_layout Standard
-4:
-\end_layout
-
-\begin_layout Subsubsection*
-Classification algorithms
 \end_layout
 
 \end_body
