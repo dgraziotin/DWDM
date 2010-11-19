@@ -295,6 +295,12 @@ Analysis of Techniques
 Blood Transfusion
 \end_layout
 
+\begin_layout Standard
+Since this data set is not so wide, we did not apply optimizations and we
+ used the following techniques.
+ 
+\end_layout
+
 \begin_layout Subsubsection*
 Decision Tree
 \end_layout
@@ -383,6 +389,38 @@ KNN Classifier (KNN = 5)
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+All models were tested on different sized datasets.
+ This allowed us to compair results between models that have been applied
+ to the entire data set and models applied to a training data subset.
+ One advantage to the blood tranfusion data set is that it does not contain
+ missing values.
+ Therefore, experiments such as replacing or removing missing data were
+ not taken into consideration.
+ 
+\end_layout
+
+\begin_layout Standard
+In addition, the blood transfusion data set is composed by a small amout
+ of tuples, therefore the processing costs were drammatically cheap, even
+ if when techniques were tested on the entire data set.
+ 
+\end_layout
+
+\begin_layout Standard
+We also noticed that, while using a data training set, results accuracy
+ decreases.
+ We followed this kind of approach in order to make the previously shown
+ comparisons, even if, as wrote before, the data set size is small and models
+ applied to the entire data set were inexpensive and reliable.
+\end_layout
+
+\begin_layout Standard
+In conclusion, all models were obviously more accurated when tested on the
+ entire data set.
+ The decision tree approach was the one that had the best performances.
 \end_layout
 
 \begin_layout Subsection
