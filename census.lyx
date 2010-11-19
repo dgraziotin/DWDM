@@ -63,7 +63,7 @@
 \begin_body
 
 \begin_layout Title
-Data Mining Classification Algorithms: an analysis
+Data Mining Classification Models: an analysis
 \end_layout
 
 \begin_layout Author
@@ -75,11 +75,23 @@ October / November 2010
 \end_layout
 
 \begin_layout Abstract
-Blah blah blah a couple of words regarding the choice of the two datasets.
- Blood transfusion missing class, for testing prediction.
- Census Income has class, good for benchmarking classification techniques.
- Expand this! Talk about sections, summary of one page of the four algorithms
- as last page
+This document analyzes various techniques of analysis and data manipulation.
+ In particular, it investigates about four different classification models,
+ namely Decision tree, Naïve Bayesian Classifier, Logistic Regression and
+ KNN classifier, that are summarized in the last page.
+ The experiments are performed on two completely different datasets, blood-trans
+fusion and census-income, specifically chosen in order to compare work done
+ on small versus big datasets.
+ Blood transfusion is relatively small and has a reduced amount of attributes,
+ while census-income is bigger, having also a more relevant amount of attributes
+ to investigate on.
+ On the first dataset there is not a class so we introduced one, in order
+ to perform our test and focus on classification and prediction.
+ This was not needed for the second dataset, since it was already containing
+ a class to be analyzed.
+ Therefore we used this dataset mainly for benchmarking and performance
+ analysis of the classification models by varying the data pre-processing
+ techniques they have in common.
 \end_layout
 
 \begin_layout Section
@@ -97,7 +109,7 @@ Census Income
 \begin_layout Standard
 The dataset contains 15 attributes and a total of 32561 instance.
  The following is a representation of the attributes and their types, extracted
- from the ARFF file:
+ from the ARFF file we created.
 \end_layout
 
 \begin_layout Standard
@@ -187,27 +199,47 @@ class 	{ >50K, <=50K}
 \end_layout
 
 \begin_layout Standard
-Education and Education-Num seems are referring to the same value, where
- education-num is a numerical representation of education.
+
+\series bold
+Education
+\series default
+ and 
+\series bold
+rducation-num
+\series default
+ are referring to the same value, where education-num is a numerical representat
+ion of education.
 \end_layout
 
 \begin_layout Standard
-Attribute fnlwgt does not appear to make any sense and will be ignored.
+Attribute 
+\series bold
+fnlwgt
+\series default
+ does not appear to have any meaningful sense.
+ Further researches confirmed our 
+\end_layout
+
+\begin_layout Standard
+There are 
+\series bold
+missing values
+\series default
+ for attributes workclass (6%), occupation (6%), native-country (2%).
+ Two possible strategies to deal with the missing values are complete removal
+ of the instances having missing values and substitution of the missing
+ values with the mode value of the attribute.
  
 \end_layout
 
 \begin_layout Standard
-There are missing values for attributes workclass (6%), occupation (6%),
- native-country (2%).
- Two possible strategies to deal with the missing values are complete removal
- of the instances having missing values and substitution of the missing
- values with the mode value of the attribute.
- Both of them will be analyzed.
-\end_layout
-
-\begin_layout Standard
-The two attributes age and hours-per-week have been selected.
- The following are their boxplot representation:
+The two attributes age and hours-per-week have been selected for further
+ analysis.
+ The following are their 
+\series bold
+boxplot
+\series default
+ representation:
 \end_layout
 
 \begin_layout Standard
@@ -286,26 +318,28 @@ status open
 \end_layout
 
 \begin_layout Standard
-There are outliers for both the selected attributes.
+There are 
+\series bold
+outliers
+\series default
+ for both the selected attributes.
  They will be treated with discretization techniques.
 \end_layout
 
 \begin_layout Standard
-Data similarity: 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Take it from slides!
-\end_layout
-
-\end_inset
-
-
+Possible 
+\series bold
+data similarity
+\series default
+ technique: here we have in addition to numeric values also nominal values.
+ In this case we can do a simple matching using the formula d(I,j)= (p-m)/p
+ where m is the number of matches and p is the number of variables or we
+ could create a binary mapping for those values.
 \end_layout
 
 \begin_layout Standard
-Data mining tasks: an interesting task could focus around the income class.
+Possibe data mining tasks: an interesting task could focus around the income
+ class.
  For example we could construct a tree which tells us if a 20-24 or a 25-30
  years old with different work class can be mapped in a >50K income class.
 \end_layout
@@ -328,42 +362,65 @@ E.G Age + Work => Class income: >50K /<=50K
 Analysis of Techniques
 \end_layout
 
-\begin_layout Standard
-For analyzing the classification algorithms, we decided to prepare an evaluation
- framework containing variables commonly adjustable with each algorithm.
- 
+\begin_layout Subsection
+Census Income
+\end_layout
+
+\begin_layout Subsection*
+Benchmark Framework
 \end_layout
 
 \begin_layout Standard
-For preparing it, we first decided how to pre-process the data that can
- be evaluated by all four algorithms.
- All other settings not commonly shared by the algorithms will be kept to
- the values that Weka proposes.
- Further experimenting with the single algorithms will be performed in the
- next section.
+For analyzing the classification models by varying the data pre-processing
+ techniques, we decided to prepare an evaluation framework (that is, a benchmark
+) including various possible combination of data pre-processing techniques.
+ The following are the variables taken into account by preparing the framework.
 \end_layout
 
 \begin_layout Subsubsection*
-Missing Values and Outliers
+Framework variables
+\end_layout
+
+\begin_layout Paragraph*
+Missing Values
 \end_layout
 
 \begin_layout Standard
 We decided to simply substitute the missing values of instances with the
  mode value of each attribute, as the method of removing instances is discourage
 d.
- Outliers will be treated by applying discretization.
+ 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Paragraph*
+Outliers
+\end_layout
+
+\begin_layout Standard
+Outliers will be treated by applying discretization.
+\end_layout
+
+\begin_layout Paragraph*
+Attribute selection
+\end_layout
+
+\begin_layout Standard
+We will just remove the two attributes that we find of no particular interest.
+ No other attribute selection techniques are taken into account, as we don't
+ find comfortable with them.
+ 
+\end_layout
+
+\begin_layout Paragraph*
 Chosen Datasets
 \end_layout
 
 \begin_layout Standard
-We will use the four algorithms on both the supplied data sets at full.
+We will use the four classification models on the full data set.
 \end_layout
 
-\begin_layout Paragraph
-Approach
+\begin_layout Subsubsection*
+Framework approach
 \end_layout
 
 \begin_layout Standard
@@ -372,7 +429,7 @@ The framework will be run as described in this paragraph.
 \end_layout
 
 \begin_layout Enumerate
-Without any other preprocessing techniques
+Without any preprocessing technique
 \end_layout
 
 \begin_layout Enumerate
@@ -408,7 +465,7 @@ The best options for each classification algorithm will be chosen and used
  for further experiments.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsection*
 Results
 \end_layout
 
@@ -419,14 +476,15 @@ ns presented in the previous paragraph.
  performed better.
  We also enclosed in square brackets the best performing algorithm for each
  run.
- For steps 1,2,3 and 4 we also used different values for k parameter, as
- the results would not change otherwise.
+ For steps 1, 2, 3 and 4 we also used different values for k parameter,
+ as the results would not change otherwise, and keep the best found k for
+ the next settings.
 \end_layout
 
 \begin_layout Enumerate
 J48 87.8566%; NaiveBayes 83.4465%; Logistics 84.896%;
 \color black
- k-nearest neighbour (k=400): 85.3482%
+ K-Nearest Neighbour (k=400): 85.3482%
 \end_layout
 
 \begin_layout Enumerate
@@ -436,7 +494,7 @@ J48 88.0102%
 \color inherit
 ; NaiveBayes 83.3144%; Logistics 84.896%;
 \color black
- k-nearest neighbour: (k=10): 85.9065%
+ K-Nearest Neighbour: (k=10): 85.9065%
 \end_layout
 
 \begin_layout Enumerate
@@ -449,7 +507,7 @@ NaiveBayes 83.4557%
 ; 
 \series default
 \color black
-k-nearest neighbour (k=7): 86.8063%
+K-Nearest Neighbour (k=7): 86.8063%
 \end_layout
 
 \begin_layout Enumerate
@@ -459,16 +517,16 @@ J48 88.0102%
 \color inherit
 ; NaiveBayes 83.2837%; Logistics 84.896%; 
 \color blue
-k-nearest neighbour (k=2): 89.9665%
+K-Nearest Neighbour (k=2): 89.9665%
 \end_layout
 
 \begin_layout Enumerate
-J48 87.0858%; NaiveBayes 82.4729%; Logistics 85.1663%; k-nearest neighbour
+J48 87.0858%; NaiveBayes 82.4729%; Logistics 85.1663%; K-Nearest Neighbour
  (k=2): 89.8222%
 \end_layout
 
 \begin_layout Enumerate
-J48 87.1380%; NaiveBayes 82.3193%; Logistics 85.1663%; k-nearest neighbour
+J48 87.1380%; NaiveBayes 82.3193%; Logistics 85.1663%; K-Nearest Neighbour
  (k=2): 89.856%
 \end_layout
 
@@ -477,7 +535,7 @@ J48 85.1172%; NaiveBayes 81.1032%;
 \color red
 Logistics 85.326%
 \color inherit
-; k-nearest neighbour (k=2): 87.1042%
+; K-Nearest Neighbour (k=2): 87.1042%
 \end_layout
 
 \begin_layout Enumerate
@@ -485,11 +543,27 @@ J48 85.1172%; NaiveBayes 80.9588%;
 \color red
 Logistics 85.326%
 \color inherit
-; k-nearest neighbour (k=2): 87.0643%
+; K-Nearest Neighbour (k=2): 87.0643%
 \end_layout
 
 \begin_layout Standard
-K-nn (k=2) has been the most well-performing algorithm in general.
+Delta accuracy results (best accuracy - worse accuracy):
+\end_layout
+
+\begin_layout Itemize
+J48: 2,8930%
+\end_layout
+
+\begin_layout Itemize
+NaiveBayes: 2,4969%
+\end_layout
+
+\begin_layout Itemize
+Logistics: 0,4300%
+\end_layout
+
+\begin_layout Itemize
+K-NN (k=2): 2,9022%
 \end_layout
 
 \begin_layout Section*
@@ -497,7 +571,20 @@ Conclusions
 \end_layout
 
 \begin_layout Standard
-blah blah
+The choice of two very different data sets allowed us to reason about different
+ aspects of data mining.
+ A small data size is easier and faster to be analyzed but less realiable
+ for studies.
+ A bigger one is slow to be analyzed (especially with K-NN model) but gives
+ more realiable results.
+\end_layout
+
+\begin_layout Standard
+The benchmark on data preprocessing techniques we run on census-income dataset
+ showed that the classification models react very differently.
+ The accuracy range can be improved by circa 3%.
+ Logistics Regression does not show improvements when varying data preprocessing
+ techniques.
 \end_layout
 
 \begin_layout Standard
