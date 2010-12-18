@@ -7,7 +7,6 @@ import it.unibz.algorithms.types.Row;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 import java.util.*;
 
@@ -28,13 +27,13 @@ import java.util.*;
 
   }
   
-  public static String testloading(String path) throws IOException{
+  public static String testloading(String path) throws Exception{
   	DataSet a = Utility.loadDataSet(path);
 		return a.print();
   }
   
   //path = "/Users/tom/Documents/Unibz/Master/DWDM/datasets/census-income/census-income.arff";
-  public static DataSet loadDataSet(String path) throws IOException{
+  public static DataSet loadDataSet(String path) throws Exception{
   	DataSet ret = new DataSet();
 		ArrayList<Row> datal = new ArrayList<Row>();
 		FileReader f = new FileReader(path);
@@ -51,7 +50,7 @@ import java.util.*;
 			if (line.contains("DATA")){
 				while (line != null) {
 					line = in.readLine();
-					if (line != null&&!line.isEmpty()) {
+					if (line != null&&!line.isEmpty()&&!line.contains("?")) {
 					  datal.add(new Row(line));
 					}
 				}
@@ -142,7 +141,19 @@ import java.util.*;
    }
 
 
-   
+  public static String display(Vector[] v){
+  	String ret="";
+  	for (int i=0; i<v.length; i++){
+      Vector tempV = v[i];
+      ret+=("-----------Cluster"+i+"---------\n");
+      Iterator iter = tempV.iterator();
+      while(iter.hasNext()){
+          DataPoint dpTemp = (DataPoint)iter.next();
+          ret+=("["+dpTemp.getX()+","+dpTemp.getY()+"]\n");
+      }
+  }
+  	return ret;
+  }
 
   public static String display(List<List<DataPoint>> resultList){
 

@@ -17,7 +17,10 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.KeyStroke;
 import java.awt.Point;
+
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JMenuItem;
 import javax.swing.JMenuBar;
@@ -42,6 +45,8 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 
 import com.sun.jmx.snmp.tasks.Task;
+import java.awt.Dimension;
+import javax.swing.JProgressBar;
 
 public class Main
 {
@@ -273,17 +278,20 @@ String returnVal = d.getFilePath();
 try {
 	datas= Utility.loadDataSet(returnVal);
 	Row r = datas.getAttributes();
+	jXComboBox.removeAllItems();
+	jYComboBox.removeAllItems();
 	for(int i =0;i<r.getSize();i++)
 	{
 		jXComboBox.addItem(r.getValue(i));
 		jYComboBox.addItem(r.getValue(i));
 	}
 	UpdateControls(false);
-} catch (IOException e1) {
+} catch (Exception e1) {
 	datas=null;
 	UpdateControls(false);
 	jXComboBox.removeAll();
 	jYComboBox.removeAll();
+	JOptionPane.showMessageDialog(jFrame, "There has been an error loading your dataset! Check your file for formatting issues!");
 }
 				}
 			});
@@ -629,46 +637,69 @@ try {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void ExecuteAlgo() {
 		jOutputTextArea.setText("");
-		String xvalue=null;
-		String yvalue=null;
+
 		if(this.datas!=null&&jXComboBox.getSelectedIndex()>-1&&jYComboBox.getSelectedIndex()>-1){
-			Vector dataPoints = new Vector();
-			ArrayList<Row> rows=datas.getData();
-			for(int i=0;i<rows.size();i++){
-				xvalue =rows.get(i).getValue(jXComboBox.getSelectedIndex());
-				yvalue =rows.get(i).getValue(jYComboBox.getSelectedIndex());
-				dataPoints.add(new DataPoint(isDouble(xvalue)?xvalue:String.valueOf(i),isDouble(yvalue)?yvalue:String.valueOf(i)));
-			}
 			
-			if(kmeansselected){
-			if(jNRClustersTextField.getText().trim().length()>0&&Integer.parseInt(jNRClustersTextField.getText().trim())>0&&
-					jNRIterationsTextField.getText().trim().length()>0&&Integer.parseInt(jNRIterationsTextField.getText().trim())>0){
-			
-      KMeans jca = new KMeans(Integer.parseInt(jNRClustersTextField.getText()),Integer.parseInt(jNRIterationsTextField.getText()),dataPoints);
-      jca.startAnalysis();
+			createAndShowGUI();
+			 //Schedule a job for the event-dispatching thread:
+      //creating and showing this application's GUI.
+      javax.swing.SwingUtilities.invokeLater(new Runnable() {
+          public void run() {
+        		String xvalue=null;
+        		String yvalue=null;
+          	Vector dataPoints = new Vector();
+      			ArrayList<Row> rows=datas.getData();
+      			for(int i=0;i<rows.size();i++){
+      				xvalue =rows.get(i).getValue(jXComboBox.getSelectedIndex());
+      				yvalue =rows.get(i).getValue(jYComboBox.getSelectedIndex());
+      				dataPoints.add(new DataPoint(isDouble(xvalue)?xvalue:String.valueOf(i),isDouble(yvalue)?yvalue:String.valueOf(i)));
+      			}
+          	if(kmeansselected){
+        			if(jNRClustersTextField.getText().trim().length()>0&&Integer.parseInt(jNRClustersTextField.getText().trim())>0&&
+        					jNRIterationsTextField.getText().trim().length()>0&&Integer.parseInt(jNRIterationsTextField.getText().trim())>0){
+        			
+      				((ProgressBarDemo) newContentPane).StartupKMeans(dataPoints,Integer.parseInt(jNRClustersTextField.getText()),Integer.parseInt(jNRIterationsTextField.getText()));
 
-      Vector[] v = jca.getClusterOutput();
-      for (int i=0; i<v.length; i++){
-          Vector tempV = v[i];
-          jOutputTextArea.append("-----------Cluster"+i+"---------\n");
-          Iterator iter = tempV.iterator();
-          while(iter.hasNext()){
-              DataPoint dpTemp = (DataPoint)iter.next();
-              jOutputTextArea.append("["+dpTemp.getX()+","+dpTemp.getY()+"]\n");
+             
+        			}
+        		}
+        		else{
+        			if(jEpsilonTextField.getText().trim().length()>0&&jMinPtsTextField.getText().trim().length()>0){
+        			try {
+        				((ProgressBarDemo) newContentPane).StartupDBScan(dataPoints,Integer.parseInt(jEpsilonTextField.getText()),Integer.parseInt(jMinPtsTextField.getText()));
+        				//jOutputTextArea.setText(Utility.display(DBScan.applyDbscan(,((ProgressBarDemo)newContentPane).progressBar)));
+        				//frame.dispose();
+        			} catch (Exception e) {
+        				jOutputTextArea.setText("Something wrong happened");
+        			}
+
+        		}
+        		}
           }
-      }
-			}
-		}
-		else{
-			if(jEpsilonTextField.getText().trim().length()>0&&jMinPtsTextField.getText().trim().length()>0){
-			try {
-				jOutputTextArea.setText(Utility.display(DBScan.applyDbscan(dataPoints,Integer.parseInt(jEpsilonTextField.getText()),Integer.parseInt(jMinPtsTextField.getText()))));
-			} catch (Exception e) {
-				jOutputTextArea.setText("Something wrong happened");
-			}
-
-		}
-		}
+      });
+			
+			
 		}
 	}
+	
+	private JComponent newContentPane=null;
+	private  JDialog frame=null;
+	/**
+   * Create the GUI and show it. As with all GUI code, this must run
+   * on the event-dispatching thread.
+   */
+  private void createAndShowGUI() {
+      //Create and set up the window.
+      frame = new JDialog(jFrame,"ProgressBarDemo");
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+      //Create and set up the content pane.
+      newContentPane = new ProgressBarDemo(kmeansselected,jOutputTextArea);
+      newContentPane.setOpaque(true); //content panes must be opaque
+      frame.setContentPane(newContentPane);
+
+      //Display the window.
+      frame.pack();
+      frame.setVisible(true);
+  }
 }

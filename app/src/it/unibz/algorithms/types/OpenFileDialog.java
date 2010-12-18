@@ -20,6 +20,8 @@ package it.unibz.algorithms.types;
  *  Filename:  $Id: OpenFileDialog.java,v 1.0 1999/09/14 23:42:04 wbogaardt
  */
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.io.File;
 
 /**
@@ -39,6 +41,11 @@ public class OpenFileDialog {
         if (jfcChooser == null)
         {
             jfcChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "ARFF Files", "arff");
+            jfcChooser.setFileFilter(filter);
+            jfcChooser.setAcceptAllFileFilterUsed(false);
+
         }
         int fileState = jfcChooser.showOpenDialog(null);
         File file = jfcChooser.getSelectedFile();

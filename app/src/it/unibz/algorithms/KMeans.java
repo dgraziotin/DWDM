@@ -6,8 +6,10 @@ import it.unibz.algorithms.types.DataPoint;
 
 import java.util.Vector;
 
+import javax.swing.SwingWorker;
 
-public class KMeans {
+
+public class KMeans  extends Task{
     private Cluster[] clusters;
     private int miter;
     @SuppressWarnings("rawtypes")
@@ -32,76 +34,6 @@ public class KMeans {
         mSWCSS = temp;
     }
 
-    public void startAnalysis() {
-        //set Starting centroid positions - Start of Step 1
-        setInitialCentroids();
-        int n = 0;
-        //assign DataPoint to clusters
-        loop1: while (true) {
-            for (int l = 0; l < clusters.length; l++) 
-            {
-                clusters[l].addDataPoint((DataPoint)mDataPoints.elementAt(n));
-                n++;
-                if (n >= mDataPoints.size())
-                    break loop1;
-            }
-        }
-        
-        //calculate E for all the clusters
-        calcSWCSS();
-        
-        //recalculate Cluster centroids - Start of Step 2
-        for (int i = 0; i < clusters.length; i++) {
-            clusters[i].getCentroid().calcCentroid();
-        }
-        
-        //recalculate E for all the clusters
-        calcSWCSS();
-
-        for (int i = 0; i < miter; i++) {
-            //enter the loop for cluster 1
-            for (int j = 0; j < clusters.length; j++) {
-                for (int k = 0; k < clusters[j].getNumDataPoints(); k++) {
-                
-                    //pick the first element of the first cluster
-                    //get the current Euclidean distance
-                    double tempEuDt = clusters[j].getDataPoint(k).getCurrentEuDt();
-                    Cluster tempCluster = null;
-                    boolean matchFoundFlag = false;
-                    
-                    //call testEuclidean distance for all clusters
-                    for (int l = 0; l < clusters.length; l++) {
-                    
-                    //if testEuclidean < currentEuclidean then
-                        if (tempEuDt > clusters[j].getDataPoint(k).testEuclideanDistance(clusters[l].getCentroid())) {
-                            tempEuDt = clusters[j].getDataPoint(k).testEuclideanDistance(clusters[l].getCentroid());
-                            tempCluster = clusters[l];
-                            matchFoundFlag = true;
-                        }
-                        //if statement - Check whether the Last EuDt is > Present EuDt 
-                        
-                        }
-//for variable 'l' - Looping between different Clusters for matching a Data Point.
-//add DataPoint to the cluster and calcSWCSS
-
-       if (matchFoundFlag) {
-		tempCluster.addDataPoint(clusters[j].getDataPoint(k));
-		clusters[j].removeDataPoint(clusters[j].getDataPoint(k));
-                        for (int m = 0; m < clusters.length; m++) {
-                            clusters[m].getCentroid().calcCentroid();
-                        }
-
-//for variable 'm' - Recalculating centroids for all Clusters
-
-                        calcSWCSS();
-                    }
-                    
-//if statement - A Data Point is eligible for transfer between Clusters.
-                }
-                //for variable 'k' - Looping through all Data Points of the current Cluster.
-            }//for variable 'j' - Looping through all the Clusters.
-        }//for variable 'i' - Number of iterations.
-    }
 
     @SuppressWarnings("rawtypes")
 		public Vector[] getClusterOutput() {
@@ -184,6 +116,84 @@ public class KMeans {
     public Cluster getCluster(int pos) {
         return clusters[pos];
     }
+
+		@Override
+		protected Void doInBackground() throws Exception {
+		  int progress = 0;
+		//Initialize progress property.
+		  setProgress(0);
+		//set Starting centroid positions - Start of Step 1
+      setInitialCentroids();
+      int n = 0;
+      //assign DataPoint to clusters
+      loop1: while (true) {
+          for (int l = 0; l < clusters.length; l++) 
+          {
+              clusters[l].addDataPoint((DataPoint)mDataPoints.elementAt(n));
+              n++;
+              if (n >= mDataPoints.size())
+                  break loop1;
+          }
+      }
+      
+      //calculate E for all the clusters
+      calcSWCSS();
+
+      //recalculate Cluster centroids - Start of Step 2
+      for (int i = 0; i < clusters.length; i++) {
+          clusters[i].getCentroid().calcCentroid();
+      }
+      
+      //recalculate E for all the clusters
+      calcSWCSS();
+      for (int i = 0; i < miter; i++) {
+          //enter the loop for cluster 1
+          for (int j = 0; j < clusters.length; j++) {
+              for (int k = 0; k < clusters[j].getNumDataPoints(); k++) {
+              	
+                  //pick the first element of the first cluster
+                  //get the current Euclidean distance
+                  double tempEuDt = clusters[j].getDataPoint(k).getCurrentEuDt();
+                  Cluster tempCluster = null;
+                  boolean matchFoundFlag = false;
+                  
+                  //call testEuclidean distance for all clusters
+                  for (int l = 0; l < clusters.length; l++) {
+                  
+                  //if testEuclidean < currentEuclidean then
+                      if (tempEuDt > clusters[j].getDataPoint(k).testEuclideanDistance(clusters[l].getCentroid())) {
+                          tempEuDt = clusters[j].getDataPoint(k).testEuclideanDistance(clusters[l].getCentroid());
+                          tempCluster = clusters[l];
+                          matchFoundFlag = true;
+                      }
+                      //if statement - Check whether the Last EuDt is > Present EuDt 
+                      
+                      }
+//for variable 'l' - Looping between different Clusters for matching a Data Point.
+//add DataPoint to the cluster and calcSWCSS
+
+     if (matchFoundFlag) {
+	tempCluster.addDataPoint(clusters[j].getDataPoint(k));
+	clusters[j].removeDataPoint(clusters[j].getDataPoint(k));
+                      for (int m = 0; m < clusters.length; m++) {
+                          clusters[m].getCentroid().calcCentroid();
+                      }
+
+//for variable 'm' - Recalculating centroids for all Clusters
+
+                      calcSWCSS();
+                      progress=Math.round((float)(i+1*j+1*k*100)/(n));
+                      setProgress(Math.min(progress, 100));
+                  }
+                  
+//if statement - A Data Point is eligible for transfer between Clusters.
+              }
+              //for variable 'k' - Looping through all Data Points of the current Cluster.
+          }//for variable 'j' - Looping through all the Clusters.
+      }//for variable 'i' - Number of iterations.
+      setProgress(100);
+			return null;
+		}
 }
 
 
