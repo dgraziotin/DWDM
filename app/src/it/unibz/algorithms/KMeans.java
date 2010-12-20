@@ -9,7 +9,7 @@ import java.util.Vector;
 import javax.swing.SwingWorker;
 
 
-public class KMeans  extends Task{
+public class KMeans  extends SwingWorker<Void,Void>{
     private Cluster[] clusters;
     private int miter;
     @SuppressWarnings("rawtypes")

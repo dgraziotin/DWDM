@@ -3,9 +3,11 @@ package it.unibz.algorithms;
 import it.unibz.algorithms.types.DataPoint;
 import java.util.*;
 
+import javax.swing.SwingWorker;
 
 
- public class DBScan extends Task{
+
+ public class DBScan extends SwingWorker<Void,Void>{
 
   private static List<DataPoint> pointsList=new ArrayList<DataPoint>();
   private static List<List<DataPoint>> resultList=new ArrayList<List<DataPoint>>();

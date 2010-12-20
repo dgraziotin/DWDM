@@ -4,7 +4,6 @@ package it.unibz.gui;
 
 import it.unibz.algorithms.DBScan;
 import it.unibz.algorithms.KMeans;
-import it.unibz.algorithms.Task;
 import it.unibz.algorithms.Utility;
 import it.unibz.algorithms.types.DataPoint;
 
@@ -20,7 +19,7 @@ public class ProgressBarDemo extends JPanel implements PropertyChangeListener
 
     public JProgressBar progressBar;
     private JTextArea taskOutput;
-    private Task task;
+    private SwingWorker<Void,Void> task;
     private boolean iskmeans=true;
     private JTextArea dataoutput;
     
