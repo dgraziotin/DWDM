@@ -37,7 +37,12 @@ import javax.swing.SwingWorker;
 //Initialize progress property.
   setProgress(0);
   for(int index=0;index<hundred;++index){
-
+	   // isCancelled() returns true if the cancel() method
+	   // is invoked on this class. That is the proper way
+	   // to stop this thread. See the actionPerformed
+	   // method.
+	   if (isCancelled())
+		   return null;
     List<DataPoint> tmpLst=new ArrayList<DataPoint>();
 
    DataPoint p=pointsList.get(index);
@@ -58,7 +63,12 @@ import javax.swing.SwingWorker;
   }
 
    int length=resultList.size();
-
+   // isCancelled() returns true if the cancel() method
+   // is invoked on this class. That is the proper way
+   // to stop this thread. See the actionPerformed
+   // method.
+   if (isCancelled())
+	   return null;
   for(int i=0;i<length;++i){
 
     for(int j=0;j<length;++j){

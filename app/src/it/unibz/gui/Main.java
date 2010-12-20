@@ -9,6 +9,8 @@ import it.unibz.algorithms.types.Row;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.Event;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
@@ -62,7 +64,7 @@ public class Main
 
 	private JMenuItem aboutMenuItem = null;
 
-	private JMenuItem saveMenuItem = null;
+	private JMenuItem loadMenuItem = null;
 
 	private JDialog aboutDialog = null;
 
@@ -259,12 +261,12 @@ public class Main
 	 * @return javax.swing.JMenuItem	
 	 */
 	private JMenuItem getSaveMenuItem() {
-		if (saveMenuItem == null) {
-			saveMenuItem = new JMenuItem();
-			saveMenuItem.setText("Open");
-			saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+		if (loadMenuItem == null) {
+			loadMenuItem = new JMenuItem();
+			loadMenuItem.setText("Open");
+			loadMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 					Event.CTRL_MASK, true));
-			saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+			loadMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 OpenFileDialog d = new OpenFileDialog();
 String returnVal = d.getFilePath();
@@ -291,7 +293,7 @@ try {
 				}
 			});
 		}
-		return saveMenuItem;
+		return loadMenuItem;
 	}
 
 	/**
@@ -673,14 +675,14 @@ try {
       			}
           	if(kmeansselected){
         			
-      				((ProgressBarDemo) newContentPane).StartupKMeans(dataPoints,Integer.parseInt(jNRClustersTextField.getText()),Integer.parseInt(jNRIterationsTextField.getText()));
+      				((ProgressBar) newContentPane).StartupKMeans(dataPoints,Integer.parseInt(jNRClustersTextField.getText()),Integer.parseInt(jNRIterationsTextField.getText()));
 
              
         			
         		}
         		else{
         			try {
-        				((ProgressBarDemo) newContentPane).StartupDBScan(dataPoints,Integer.parseInt(jEpsilonTextField.getText()),Integer.parseInt(jMinPtsTextField.getText()));
+        				((ProgressBar) newContentPane).StartupDBScan(dataPoints,Integer.parseInt(jEpsilonTextField.getText()),Integer.parseInt(jMinPtsTextField.getText()));
         				//jOutputTextArea.setText(Utility.display(DBScan.applyDbscan(,((ProgressBarDemo)newContentPane).progressBar)));
         				//frame.dispose();
         			} catch (Exception e) {
@@ -706,9 +708,40 @@ try {
       //Create and set up the window.
       frame = new JDialog(jFrame,"ProgressBarDemo");
       frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+      frame.addWindowListener(new WindowListener() {
+		
+		@Override
+		public void windowOpened(WindowEvent arg0) {			
+		}
+		
+		@Override
+		public void windowIconified(WindowEvent arg0) {			
+		}
+		
+		@Override
+		public void windowDeiconified(WindowEvent arg0) {			
+		}
+		
+		@Override
+		public void windowDeactivated(WindowEvent arg0) {			
+		}
+		
+		@Override
+		public void windowClosing(WindowEvent arg0) {			
+		}
+		
+		@Override
+		public void windowClosed(WindowEvent arg0) {
+			((ProgressBar) newContentPane).killprocess();
+		}
+		
+		@Override
+		public void windowActivated(WindowEvent arg0) {
+			
+		}
+	});
       //Create and set up the content pane.
-      newContentPane = new ProgressBarDemo(kmeansselected,jOutputTextArea);
+      newContentPane = new ProgressBar(kmeansselected,jOutputTextArea);
       newContentPane.setOpaque(true); //content panes must be opaque
       frame.setContentPane(newContentPane);
 

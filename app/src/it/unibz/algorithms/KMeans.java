@@ -135,10 +135,21 @@ public class KMeans  extends SwingWorker<Void,Void>{
                   break loop1;
           }
       }
-      
+
+   // isCancelled() returns true if the cancel() method
+   // is invoked on this class. That is the proper way
+   // to stop this thread. See the actionPerformed
+   // method.
+   if (isCancelled())
+	   return null;
       //calculate E for all the clusters
       calcSWCSS();
-
+      // isCancelled() returns true if the cancel() method
+      // is invoked on this class. That is the proper way
+      // to stop this thread. See the actionPerformed
+      // method.
+      if (isCancelled())
+   	   return null;
       //recalculate Cluster centroids - Start of Step 2
       for (int i = 0; i < clusters.length; i++) {
           clusters[i].getCentroid().calcCentroid();
@@ -150,7 +161,12 @@ public class KMeans  extends SwingWorker<Void,Void>{
           //enter the loop for cluster 1
           for (int j = 0; j < clusters.length; j++) {
               for (int k = 0; k < clusters[j].getNumDataPoints(); k++) {
-              	
+            	   // isCancelled() returns true if the cancel() method
+            	   // is invoked on this class. That is the proper way
+            	   // to stop this thread. See the actionPerformed
+            	   // method.
+            	   if (isCancelled())
+            		   return null;
                   //pick the first element of the first cluster
                   //get the current Euclidean distance
                   double tempEuDt = clusters[j].getDataPoint(k).getCurrentEuDt();
