@@ -677,8 +677,6 @@ public class Main {
 													.getText()), Integer
 											.parseInt(jMinPtsTextField
 													.getText()));
-							// jOutputTextArea.setText(Utility.display(DBScan.applyDbscan(,((ProgressBarDemo)newContentPane).progressBar)));
-							// frame.dispose();
 						} catch (Exception e) {
 							jOutputTextArea.setText("Something wrong happened");
 						}
