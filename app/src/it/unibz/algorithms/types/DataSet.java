@@ -13,8 +13,6 @@ public class DataSet {
 	
 	}
 	
-	
-	
     public void setName(String s){
 		this.name = s;
 	}

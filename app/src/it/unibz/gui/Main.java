@@ -4,7 +4,6 @@ package it.unibz.gui;
 import it.unibz.algorithms.Utility;
 import it.unibz.algorithms.types.DataPoint;
 import it.unibz.algorithms.types.DataSet;
-import it.unibz.algorithms.types.OpenFileDialog;
 import it.unibz.algorithms.types.Row;
 
 import java.awt.event.KeyEvent;
