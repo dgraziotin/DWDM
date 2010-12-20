@@ -1,7 +1,6 @@
 package it.unibz.gui;
 
-import it.unibz.algorithms.DBScan;
-import it.unibz.algorithms.KMeans;
+
 import it.unibz.algorithms.Utility;
 import it.unibz.algorithms.types.DataPoint;
 import it.unibz.algorithms.types.DataSet;
@@ -29,24 +28,17 @@ import javax.swing.JFrame;
 import javax.swing.JDialog;
 import javax.swing.JRadioButton;
 import javax.swing.JDesktopPane;
-import javax.swing.SwingWorker;
 
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 
-import com.sun.jmx.snmp.tasks.Task;
-import java.awt.Dimension;
-import javax.swing.JProgressBar;
 
 public class Main
 {
@@ -62,6 +54,8 @@ public class Main
 	private JMenuBar jJMenuBar = null;
 
 	private JMenu fileMenu = null;
+	public static final String NUMERIC = 
+        "0123456789";
 
 	private JMenu helpMenu = null;
 
@@ -89,15 +83,15 @@ public class Main
 
 	private JLabel jLabel2 = null;
 
-	private IntTextField jNRClustersTextField = null;
+	private JTextField jNRClustersTextField = null;
 
 	private JLabel jLabel3 = null;
 
-	private IntTextField jEpsilonTextField = null;
+	private JTextField jEpsilonTextField = null;
 
 	private JLabel jMinPointsLabel4 = null;
 
-	private IntTextField jMinPtsTextField = null;
+	private JTextField jMinPtsTextField = null;
 
 	private JButton jExecuteButton = null;
 
@@ -285,6 +279,8 @@ try {
 		jXComboBox.addItem(r.getValue(i));
 		jYComboBox.addItem(r.getValue(i));
 	}
+	jDBSCANRadioButton.setSelected(true);
+	jKMeansRadioButton.setSelected(true);
 	UpdateControls(false);
 } catch (Exception e1) {
 	datas=null;
@@ -408,8 +404,11 @@ try {
 	 */
 	private JTextField getJNRClustersTextField() {
 		if (jNRClustersTextField == null) {
-			jNRClustersTextField = new IntTextField(0,3);
+			jNRClustersTextField = new JTextField();
 			jNRClustersTextField.setBounds(new Rectangle(358, 114, 100, 20));
+			jNRClustersTextField.setDocument
+	         (new Jintfilter());
+			jNRClustersTextField.setText("2");
 			jNRClustersTextField.setEnabled(false);
 		}
 		return jNRClustersTextField;
@@ -422,11 +421,14 @@ try {
 	 */
 	private JTextField getJEpsilonTextField() {
 		if (jEpsilonTextField == null) {
-			jEpsilonTextField = new IntTextField(0,3);
+			jEpsilonTextField = new JTextField();
 			jEpsilonTextField.setBounds(new Rectangle(358
 					, 174, 100, 20));
-			jEpsilonTextField.setText("2");
 			jEpsilonTextField.setEnabled(false);
+			jEpsilonTextField.setDocument
+	         (new Jintfilter());
+			jEpsilonTextField.setText("2");
+
 		}
 		return jEpsilonTextField;
 	}
@@ -438,11 +440,13 @@ try {
 	 */
 	private JTextField getJMinPtsTextField() {
 		if (jMinPtsTextField == null) {
-			jMinPtsTextField = new IntTextField(0,3);
+			jMinPtsTextField = new JTextField();
 			jMinPtsTextField.setBounds(new Rectangle(358
 					, 204, 100, 20));
-			jMinPtsTextField.setText("4");
 			jMinPtsTextField.setEnabled(false);
+			jMinPtsTextField.setDocument(new Jintfilter());
+			jMinPtsTextField.setText("4");
+			
 		}
 		return jMinPtsTextField;
 	}
@@ -524,13 +528,17 @@ try {
 	 * 	
 	 * @return it.unibz.gui.IntTextField	
 	 */
-	private IntTextField getJNRIterationsTextField() {
+	private JTextField getJNRIterationsTextField() {
 		if (jNRIterationsTextField == null) {
-			jNRIterationsTextField = new IntTextField(0, 3);
+			jNRIterationsTextField = new JTextField();
 			jNRIterationsTextField.setBounds(new Rectangle(358
 					, 144
 					, 100, 20));
 			jNRIterationsTextField.setEnabled(false);
+			jNRIterationsTextField.setDocument
+	         (new Jintfilter());
+			jNRIterationsTextField.setText("2");
+			
 		}
 		return jNRIterationsTextField;
 	}
@@ -574,7 +582,7 @@ try {
 
 
 
-	private IntTextField jNRIterationsTextField = null;
+	private JTextField jNRIterationsTextField = null;
 
 
 
@@ -634,12 +642,22 @@ try {
 
 
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({  "unchecked" })
 	protected void ExecuteAlgo() {
 		jOutputTextArea.setText("");
 
 		if(this.datas!=null&&jXComboBox.getSelectedIndex()>-1&&jYComboBox.getSelectedIndex()>-1){
+			if(kmeansselected)
+			{	if(jNRClustersTextField.getText().trim().length()<=0&&Integer.parseInt(jNRClustersTextField.getText().trim())<=0&&
+    					jNRIterationsTextField.getText().trim().length()>=0&&Integer.parseInt(jNRIterationsTextField.getText().trim())>=0)
+					return;
+			}
+			else
+				if(jEpsilonTextField.getText().trim().length()<=0&&jMinPtsTextField.getText().trim().length()>=0)
+					return;
 			
+        			
+    			
 			createAndShowGUI();
 			 //Schedule a job for the event-dispatching thread:
       //creating and showing this application's GUI.
@@ -655,16 +673,13 @@ try {
       				dataPoints.add(new DataPoint(isDouble(xvalue)?xvalue:String.valueOf(i),isDouble(yvalue)?yvalue:String.valueOf(i)));
       			}
           	if(kmeansselected){
-        			if(jNRClustersTextField.getText().trim().length()>0&&Integer.parseInt(jNRClustersTextField.getText().trim())>0&&
-        					jNRIterationsTextField.getText().trim().length()>0&&Integer.parseInt(jNRIterationsTextField.getText().trim())>0){
         			
       				((ProgressBarDemo) newContentPane).StartupKMeans(dataPoints,Integer.parseInt(jNRClustersTextField.getText()),Integer.parseInt(jNRIterationsTextField.getText()));
 
              
-        			}
+        			
         		}
         		else{
-        			if(jEpsilonTextField.getText().trim().length()>0&&jMinPtsTextField.getText().trim().length()>0){
         			try {
         				((ProgressBarDemo) newContentPane).StartupDBScan(dataPoints,Integer.parseInt(jEpsilonTextField.getText()),Integer.parseInt(jMinPtsTextField.getText()));
         				//jOutputTextArea.setText(Utility.display(DBScan.applyDbscan(,((ProgressBarDemo)newContentPane).progressBar)));
@@ -673,7 +688,7 @@ try {
         				jOutputTextArea.setText("Something wrong happened");
         			}
 
-        		}
+        		
         		}
           }
       });
