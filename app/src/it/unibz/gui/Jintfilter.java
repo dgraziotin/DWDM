@@ -1,36 +1,35 @@
 package it.unibz.gui;
 
-import javax.swing.*; 
-import javax.swing.text.*; 
+import javax.swing.text.*;
 
- public class Jintfilter extends PlainDocument {
-   
-   
+public class Jintfilter extends PlainDocument {
 
-   protected String acceptedChars = "0123456789";
-   protected boolean negativeAccepted = false;
-   
-   public Jintfilter() {
-     }
-  
-   
+	/**
+	 * Needed for new versions of Java
+	 */
+	private static final long serialVersionUID = -1915431371745857789L;
+	protected String acceptedChars = "0123456789";
+	protected boolean negativeAccepted = false;
 
-   public void insertString
-      (int offset, String  str, AttributeSet attr)
-         throws BadLocationException {
-     if (str == null) return;
+	public Jintfilter() {
+	}
 
-     for (int i=0; i < str.length(); i++) {
-       if (acceptedChars.indexOf(str.valueOf(str.charAt(i))) == -1)
-         return;
-       }
+	public void insertString(int offset, String string,
+			AttributeSet attributeSet) throws BadLocationException {
+		if (string == null)
+			return;
 
-     if (negativeAccepted && str.indexOf("-") != -1) {
-        if (str.indexOf("-") != 0 || offset != 0 ) {
-           return;
-           }
-        }
+		for (int i = 0; i < string.length(); i++) {
+			if (acceptedChars.indexOf(String.valueOf(string.charAt(i))) == -1)
+				return;
+		}
 
-     super.insertString(offset, str, attr);
-   }
+		if (negativeAccepted && string.indexOf("-") != -1) {
+			if (string.indexOf("-") != 0 || offset != 0) {
+				return;
+			}
+		}
+
+		super.insertString(offset, string, attributeSet);
+	}
 }
