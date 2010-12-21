@@ -624,7 +624,6 @@ public class Main {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
 	protected void ExecuteAlgo() {
 		jOutputTextArea.setText("");
 
@@ -649,7 +648,7 @@ public class Main {
 				public void run() {
 					String xvalue = null;
 					String yvalue = null;
-					Vector dataPoints = new Vector();
+					Vector<DataPoint> dataPoints = new Vector<DataPoint>();
 					ArrayList<Row> rows = datas.getData();
 					for (int i = 0; i < rows.size(); i++) {
 						xvalue = rows.get(i).getValue(

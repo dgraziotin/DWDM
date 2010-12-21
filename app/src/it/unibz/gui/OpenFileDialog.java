@@ -23,9 +23,10 @@ public class OpenFileDialog {
 	private boolean isFileSelected = false;
 
 	/**
-	 * The constructor automatically looks if there is an instance of jFileChooser,
-	 * or creates a new one if needed, it forces a filtering of .arff files,
-	 * makes the dialog appear and sets the behavior of the OK and CANCEL buttons 
+	 * The constructor automatically looks if there is an instance of
+	 * jFileChooser, or creates a new one if needed, it forces a filtering of
+	 * .arff files, makes the dialog appear and sets the behavior of the OK and
+	 * CANCEL buttons
 	 */
 	public OpenFileDialog() {
 		if (jFileChooser == null) {
