@@ -661,7 +661,7 @@ public class Main {
 					}
 					if (kmeansselected) {
 
-						((ProgressBar) newContentPane).StartupKMeans(
+						((ProgressGui) newContentPane).StartupKMeans(
 								dataPoints, Integer
 										.parseInt(jNRClustersTextField
 												.getText()), Integer
@@ -670,7 +670,7 @@ public class Main {
 
 					} else {
 						try {
-							((ProgressBar) newContentPane).StartupDBScan(
+							((ProgressGui) newContentPane).StartupDBScan(
 									dataPoints, Integer
 											.parseInt(jEpsilonTextField
 													.getText()), Integer
@@ -722,7 +722,7 @@ public class Main {
 
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				((ProgressBar) newContentPane).killprocess();
+				((ProgressGui) newContentPane).killprocess();
 			}
 
 			@Override
@@ -731,7 +731,7 @@ public class Main {
 			}
 		});
 		// Create and set up the content pane.
-		newContentPane = new ProgressBar(kmeansselected, jOutputTextArea);
+		newContentPane = new ProgressGui(kmeansselected, jOutputTextArea);
 		newContentPane.setOpaque(true); // content panes must be opaque
 		frame.setContentPane(newContentPane);
 
