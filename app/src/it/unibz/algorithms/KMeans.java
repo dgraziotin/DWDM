@@ -54,6 +54,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 		x1 = (instances.elementAt(0)).getX();
 		y1 = (instances.elementAt(0)).getY();
 		x2 = (instances.elementAt(0)).getX();
+		y2 = (instances.elementAt(0)).getY();
 		for (int i = 0; i < instances.size(); i++) {
 			Instance dp = instances.elementAt(i);
 			x1 = (dp.getX() > x1) ? dp.getX() : x1;
@@ -93,7 +94,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 			return null;
 		//Step 4
 		refreshCentroids();
-
+try{
 		for (int i = 0; i < numberiterations; i++) {
 			for (int j = 0; j < clusters.size(); j++) {
 				for (int k = 0; k < clusters.get(j).getNumInstances(); k++) {
@@ -121,6 +122,10 @@ public class KMeans  extends SwingWorker<Void,Void>{
 				}
 			}
 		}
+}
+catch(Exception e){
+	e.printStackTrace();
+}
 		setProgress(100);
 		return null;
 	}

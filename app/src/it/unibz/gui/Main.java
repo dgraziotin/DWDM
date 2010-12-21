@@ -276,6 +276,7 @@ public class Main {
 						Row r = datas.getAttributes();
 						jXComboBox.removeAllItems();
 						jYComboBox.removeAllItems();
+						jOutputTextArea.setText("");
 						for (int i = 0; i < r.getSize(); i++) {
 							jXComboBox.addItem(r.getValue(i));
 							jYComboBox.addItem(r.getValue(i));
@@ -286,6 +287,7 @@ public class Main {
 					} catch (Exception e1) {
 						jNrElementsLabel9.setText("0 Rows");
 						jNrSkippedRowsLabel9.setText("0 Skipped Rows (missing value)");
+						jOutputTextArea.setText("");
 						String message = "There has been an error loading your dataset! Check your file for formatting issues!";
 						if(e1.getMessage().contains("ALLMISSING"))
 							message="All imported lines contain missing values!";
@@ -730,7 +732,9 @@ public class Main {
 	 */
 	private void createAndShowGUI() {
 		// Create and set up the window.
-		frame = new JDialog(jFrame, "ProgressBarDemo");
+		fileMenu.setEnabled(false);
+		jExecuteButton.setEnabled(false);
+		frame = new JDialog(jFrame, "Execution process");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.addWindowListener(new WindowListener() {
 
@@ -757,6 +761,8 @@ public class Main {
 			@Override
 			public void windowClosed(WindowEvent arg0) {
 				((ProgressGui) newContentPane).killProcess();
+				fileMenu.setEnabled(true);
+				jExecuteButton.setEnabled(true);
 			}
 
 			@Override
