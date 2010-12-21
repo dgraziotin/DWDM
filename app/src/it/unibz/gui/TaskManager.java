@@ -3,7 +3,7 @@ package it.unibz.gui;
 import it.unibz.algorithms.DBScan;
 import it.unibz.algorithms.KMeans;
 import it.unibz.algorithms.Utility;
-import it.unibz.algorithms.types.DataPoint;
+import it.unibz.algorithms.types.Instance;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -31,27 +31,27 @@ public class TaskManager implements PropertyChangeListener {
 		this.isKmeans = isKmeans;
 		this.progressGui = progressGui;
 	}
-	
+
 	/**
 	 * Method responsible for invoking the KMeans algorithm inside a task (a thread)
-	 * @param dataPoints
+	 * @param Instances
 	 * @param parseInt
 	 * @param parseInt2
 	 */
-	public void startupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
-		this.task = new KMeans(parseInt, parseInt2, dataPoints);
+	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2) {
+		this.task = new KMeans(parseInt, parseInt2, Instances);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
 	}
-	
+
 	/**
 	 * Method responsible for starting the DBSCAN algorithm inside a task (a new thread)
-	 * @param dataPoints
+	 * @param Instances
 	 * @param e
 	 * @param minp
 	 */
-	public void startupDBScan(List<DataPoint> dataPoints, int e, int minp) {
-		this.task = new DBScan(dataPoints, e, minp);
+	public void startupDBScan(List<Instance> Instances, int e, int minp) {
+		this.task = new DBScan(Instances, e, minp);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
 	}
@@ -63,18 +63,19 @@ public class TaskManager implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		if ("progress" == evt.getPropertyName()) {
 			int progress = (Integer) evt.getNewValue();
-			
+
 			progressGui.getProgressBar().setValue(progress);
 			progressGui.getTaskProgress().setText(String.format("Completed %d%% of "
 					+ (isKmeans ? "KMeans" : "DBScan"), task.getProgress()));
 			if (progress == 100) {
 				if (!isKmeans)
-					progressGui.getDataOutput().setText(Utility.display(DBScan.getScanResult()));
+					progressGui.getDataOutput().setText(Utility.display(((DBScan) this.task)
+							.getClusters(),true));
 				else
 					progressGui.getDataOutput().setText(Utility.display(((KMeans) this.task)
-							.getClusterOutput()));
+							.getClusters(),false));
 				((JDialog) progressGui.getParent().getParent().getParent())
-						.dispose();
+				.dispose();
 			}
 		}
 	}
@@ -84,5 +85,5 @@ public class TaskManager implements PropertyChangeListener {
 	public void killProcess() {
 		task.cancel(true);
 	}
-	
+
 }

@@ -1,190 +1,91 @@
 package it.unibz.algorithms;
 
 
-import it.unibz.algorithms.types.DataPoint;
+import it.unibz.algorithms.types.Cluster;
 import it.unibz.algorithms.types.DataSet;
+import it.unibz.algorithms.types.Instance;
 import it.unibz.algorithms.types.Row;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
-import java.util.*;
-
- 
-
- public  class Utility {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
-  public static double getDistance(DataPoint p,DataPoint q){
+/**
+ * General Utility class used to perform basic printing and data loading tasks
+ *
+ */
+public  class Utility {
 
-   double dx=p.getX()-q.getX();
-
-    double dy=p.getY()-q.getY();
-
-    double distance=Math.sqrt(dx*dx+dy*dy);
-
-     return distance;
-
-  }
-  
-  public static String testloading(String path) throws Exception{
-  	DataSet a = Utility.loadDataSet(path);
-		return a.print();
-  }
-  
-  //path = "/Users/tom/Documents/Unibz/Master/DWDM/datasets/census-income/census-income.arff";
-  public static DataSet loadDataSet(String path) throws Exception{
-  	DataSet ret = new DataSet();
+	/**
+	 * Method is used to parse an arff file into the system.
+	 * @param path Is the path to the arff file
+	 * @return DataSet representing arff file
+	 * @throws Exception if its unable to read arff file
+	 */
+	//path = "/Users/tom/Documents/Unibz/Master/DWDM/datasets/census-income/census-income.arff";
+	public static DataSet loadDataSet(String path) throws Exception{
+		DataSet ret = new DataSet();
 		ArrayList<Row> datal = new ArrayList<Row>();
 		FileReader f = new FileReader(path);
 		BufferedReader in = new BufferedReader(f);
-		Row e;
 		String line = "";//in.readLine();
 		while (line != null) {
 			line = in.readLine();
 			if (line.contains("RELATION")){
 				ret.setName(line.toString().split(" ")[1]);
 			}
-			if (line.contains("ATTRIBUTE")) 
+			if (line.contains("ATTRIBUTE"))
 				ret.setAttributes(line.toString());
 			if (line.contains("DATA")){
 				while (line != null) {
 					line = in.readLine();
-					if (line != null&&!line.isEmpty()&&!line.contains("?")) {
-					  datal.add(new Row(line));
+					if (line != null&&!line.isEmpty()){
+						if(!line.contains("?")) 
+							datal.add(new Row(line));
+						else
+							ret.incSkippedamount();
 					}
+					
 				}
 			}
 		}
 		ret.setData(datal);
 		f.close();
+		if(datal.size()==0){
+			ret=null;
+			throw new Exception("ALLMISSING");
+			}
 		return ret;
 	}
 
-
-  public static List<DataPoint> isKeyPoint(List<DataPoint> lst,DataPoint p,int e,int minp){
-
-   int count=0;
-
-    List<DataPoint> tmpLst=new ArrayList<DataPoint>();
-
-    for(Iterator<DataPoint> it=lst.iterator();it.hasNext();){
-
-     DataPoint q=it.next();
-
-     if(getDistance(p,q)<=e){
-
-       ++count;
-
-       if(!tmpLst.contains(q)){
-
-         tmpLst.add(q);
-
-       }
-
-     }
-
-    }
-
-    if(count>=minp){
-
-     p.setKey(true);
-
-      return tmpLst;
-
-    }
-
-     return null;
-
-   }
-
-
-  public static boolean mergeList(List<DataPoint> a,List<DataPoint> b){
-
-    boolean merge=false;
-
-   if(a==null || b==null){
-
-      return false;
-
-    }
-
-   for(int index=0;index<b.size();++index){
-
-     DataPoint p=b.get(index);
-
-    if(p.isKey() && a.contains(p)){
-
-         merge=true;
-
-        break;
-
-      }
-
-    }
-
-    if(merge){
-
-      for(int index=0;index<b.size();++index){
-
-         if(!a.contains(b.get(index))){
-
-           a.add(b.get(index));
-        }
-
-       }
-
-     }
-
-    return merge;
-
-   }
-
-
-  public static String display(Vector[] v){
-  	String ret="";
-  	for (int i=0; i<v.length; i++){
-      Vector tempV = v[i];
-      ret+=("-----------Cluster"+i+"---------\n");
-      Iterator iter = tempV.iterator();
-      while(iter.hasNext()){
-          DataPoint dpTemp = (DataPoint)iter.next();
-          ret+=("["+dpTemp.getX()+","+dpTemp.getY()+"]\n");
-      }
-  }
-  	return ret;
-  }
-
-  public static String display(List<List<DataPoint>> resultList){
-
-     int index=1;
-String result ="";
-     for(Iterator<List<DataPoint>> it=resultList.iterator();it.hasNext();){
-
-     List<DataPoint> lst=it.next();
-
-      if(lst.isEmpty()){
-
-       continue;
-
-       }
-
-      result+=("-----"+index+"-----\n");
-
-       for(Iterator<DataPoint> it1=lst.iterator();it1.hasNext();){
-
-       DataPoint p=it1.next();
-
-       result+=(p.print());
-
-     }
-       result+="\n";
-
-     index++;
-
-    }
-return result;
- }
+	/**
+	 * Method returns formatted string ready to be displayed in the GUI's output box
+	 * @param clusters List of clusters to display
+	 * @param rename True if Clusters have to be renamed (For DBSCAN)
+	 * @return Formatted output String
+	 */
+	public static String display(List<Cluster> clusters,boolean rename){
+		int index=1;
+		String result ="";
+		Cluster temp=null;
+		for(Iterator<Cluster> it=clusters.iterator();it.hasNext();){
+			temp = it.next();
+			if(temp.getInstances().isEmpty()){
+				continue;
+			}
+			result+=("----- "+(rename?"Cluster "+index:temp.getName())+" -----\n");
+			for(Iterator<Instance> it1=temp.getInstances().iterator();it1.hasNext();){
+				Instance p=it1.next();
+				result+=(p.print());
+			}
+			result+="\n";
+			index++;
+		}
+		return result;
+	}
 
 }
 

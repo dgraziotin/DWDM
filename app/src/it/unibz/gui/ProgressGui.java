@@ -1,16 +1,21 @@
 package it.unibz.gui;
 
-import it.unibz.algorithms.types.DataPoint;
+import it.unibz.algorithms.types.Instance;
 
-import java.awt.*;
-import javax.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Insets;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 /**
  * Our personalized progress bar, showed when our algorithms are executed.
- * We need it because one of our datasets contains 30k+ tuples and there 
+ * We need it because one of our datasets contains 30k+ tuples and there
  * was a need to let the user know about the status of the operations.
  */
 public class ProgressGui extends JPanel{
@@ -23,12 +28,12 @@ public class ProgressGui extends JPanel{
 	 * The default Swing progressbar
 	 */
 	public JProgressBar progressBar;
-	
+
 	/**
 	 * A text area for outputting some text about the status
 	 */
 	private JTextArea taskProgress;
-	
+
 	/**
 	 * Sets up the GUI for progress bar and output
 	 * @param isKmeans
@@ -43,7 +48,7 @@ public class ProgressGui extends JPanel{
 		this.taskProgress = new JTextArea(5, 20);
 		this.taskProgress.setMargin(new Insets(5, 5, 5, 5));
 		this.taskProgress.setEditable(false);
-		
+
 		this.dataOutput = dataOutput;
 
 		JPanel panel = new JPanel();
@@ -52,11 +57,11 @@ public class ProgressGui extends JPanel{
 
 		this.add(panel, BorderLayout.PAGE_START);
 		this.add(new JScrollPane(taskProgress), BorderLayout.CENTER);
-		
-		
+
+
 		this.taskManager = new TaskManager(isKmeans, this);
 	}
-	
+
 	/**
 	 * @return the taskProgress
 	 */
@@ -92,8 +97,8 @@ public class ProgressGui extends JPanel{
 	 */
 	public JTextArea getDataOutput() {
 		return dataOutput;
-	}	
-	
+	}
+
 	/**
 	 * @return the progressBar
 	 */
@@ -108,31 +113,31 @@ public class ProgressGui extends JPanel{
 		this.progressBar = progressBar;
 	}
 
-	
+
 	/**
 	 * Method responsible for invoking the KMeans algorithm inside a task (a thread)
-	 * @param dataPoints
+	 * @param Instances
 	 * @param parseInt
 	 * @param parseInt2
 	 */
-	public void startupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
-		taskManager.startupKMeans(dataPoints, parseInt, parseInt2);
+	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2) {
+		taskManager.startupKMeans(Instances, parseInt, parseInt2);
 	}
-	
+
 	/**
 	 * Method responsible for starting the DBSCAN algorithm inside a task (a new thread)
-	 * @param dataPoints
+	 * @param Instances
 	 * @param e
 	 * @param minp
 	 */
-	public void startupDBScan(List<DataPoint> dataPoints, int e, int minp) {
-		taskManager.startupDBScan(dataPoints, e, minp);
+	public void startupDBScan(List<Instance> Instances, int e, int minp) {
+		taskManager.startupDBScan(Instances, e, minp);
 	}
-	
+
 	public void killProcess(){
 		taskManager.killProcess();
 	}
 
-	
+
 
 }

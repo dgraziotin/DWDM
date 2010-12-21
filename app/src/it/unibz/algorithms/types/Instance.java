@@ -5,13 +5,13 @@ package it.unibz.algorithms.types;
  * eclaudean distance and a second method that tests it.
  *
  */
-public class DataPoint {
+public class Instance {
 	private double x,y;
 	private Cluster cluster;
 	private double euclideanDistance;
 	private boolean isKey;
 	private boolean isClassed;
-	
+
 
 	/**
 	 * Returns true whether if it is the key or false otherwise
@@ -31,40 +31,19 @@ public class DataPoint {
 	}
 
 	/**
-	 * This method tells whether the datapoint is classed or not
-	 * @return True if the datapoint is classed.
+	 * This method tells whether the Instance is classed or not
+	 * @return True if the Instance is classed.
 	 */
 	public boolean isClassed () {
 		return isClassed;
 	}
 
 	/**
-	 * This method sets a new value to the variable isClased
-	 * @param isClassed Boolean value
-	 */
-	public void setClassed (boolean isClassed) {
-		this.isClassed = isClassed;
-	}
-
-	/**
-	 * This constructor sets the the coordinates of a datapoint and its name 
-	 * @param x coordinate x
-	 * @param y coordinate y
-	 * @param name datapoint name
-	 */
-	public DataPoint(double x, double y, String name) {
-		this.x = x;
-		this.y = y;
-		this.cluster = null;
-	}
-
-
-	/**
-	 * This constructor sets the the coordinates of a datapoint
+	 * This constructor sets the the coordinates of a Instance
 	 * @param value coordinate x
 	 * @param value2 coordinate y
 	 */
-	public DataPoint(String value, String value2) {
+	public Instance(String value, String value2) {
 		this.x=Double.parseDouble(value);
 		this.y=Double.parseDouble(value2);
 	}
@@ -82,10 +61,10 @@ public class DataPoint {
 	/**
 	 * This method calculates the euclidean distance
 	 */
-	public void calcEuclideanDistance() { 
-		//called when DP is added to a cluster or when a Centroid is recalculated.
-		euclideanDistance = Math.sqrt(Math.pow((x - cluster.getCentroid().getClusterX()),
-				2) + Math.pow((y - cluster.getCentroid().getClusterY()), 2));
+	public void calcEuclideanDistance() {
+		if(cluster.getCentroid()!=null)
+			euclideanDistance = Math.sqrt(Math.pow((x - cluster.getCentroid().getClusterX()),
+					2) + Math.pow((y - cluster.getCentroid().getClusterY()), 2));
 	}
 
 	/**
@@ -111,14 +90,6 @@ public class DataPoint {
 	 */
 	public double getY() {
 		return y;
-	}
-
-	/**
-	 * Return an object of type cluster
-	 * @return cluster
-	 */
-	public Cluster getCluster() {
-		return cluster;
 	}
 
 	/**

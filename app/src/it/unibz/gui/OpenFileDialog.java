@@ -1,8 +1,9 @@
 package it.unibz.gui;
 
 import java.io.File;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * A GUI Dialog to let user choose a file, that lets us filter only the
@@ -54,7 +55,7 @@ public class OpenFileDialog {
 	public String getFilePath() {
 		return filePath;
 	}
-	
+
 	/**
 	 * Allows setting of the file path
 	 * 

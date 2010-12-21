@@ -1,6 +1,8 @@
 package it.unibz.gui;
 
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /**
  * A representation for creating personalized filter on user inputs. In this

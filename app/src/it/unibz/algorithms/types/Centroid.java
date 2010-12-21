@@ -1,8 +1,8 @@
 package it.unibz.algorithms.types;
 
 /**
- * This class represent a centroid. This class is useful for example for the k-means algorithm that assigns  
- * each point to the cluster whose centroid is nearest. 
+ * This class represent a centroid. This class is useful for example for the k-means algorithm that assigns
+ * each point to the cluster whose centroid is nearest.
  * It contains the coordinates x, y and also an object of type cluster.
  */
 public class Centroid {
@@ -10,7 +10,7 @@ public class Centroid {
 	private double x, y;
 	private Cluster cluster;
 
-	
+
 	/**
 	 * This constructor assigns only the coordinates to the centroid object
 	 * @param x coordinate x
@@ -23,23 +23,23 @@ public class Centroid {
 
 	/**
 	 * This method retrieves the number of data points, then calculates the new centroid. After that
-	 * it calculates the new euclidean distance for each datapoint. Finally, it calculates the new
+	 * it calculates the new euclidean distance for each Instance. Finally, it calculates the new
 	 * sum of squares for the cluster.
 	 */
 	public void calcCentroid() {
-		int dataPoints = cluster.getNumDataPoints();
+		int Instances = cluster.getNumInstances();
 		double x=0, y=0;
 		int i;
-		for (i=0; i<dataPoints; i++) {
-			x = x+cluster.getDataPoint(i).getX();
-			y = y+cluster.getDataPoint(i).getY();
+		for (i=0; i<Instances; i++) {
+			x = x+cluster.getInstance(i).getX();
+			y = y+cluster.getInstance(i).getY();
 		}
-		this.x = x / dataPoints;
-		this.y = y / dataPoints;
+		this.x = x / Instances;
+		this.y = y / Instances;
 		x = 0;
 		y = 0;
-		for (i = 0; i < dataPoints; i++) {
-			cluster.getDataPoint(i).calcEuclideanDistance();
+		for (i = 0; i < Instances; i++) {
+			cluster.getInstance(i).calcEuclideanDistance();
 		}
 		cluster.calcSumOfSquares();
 	}
@@ -67,14 +67,6 @@ public class Centroid {
 	 */
 	public double getClusterY() {
 		return y;
-	}
-
-	/**
-	 * This method returns an object of type cluster
-	 * @return Cluster object
-	 */
-	public Cluster getCluster() {
-		return cluster;
 	}
 
 }

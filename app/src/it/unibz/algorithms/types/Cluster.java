@@ -1,6 +1,7 @@
 package it.unibz.algorithms.types;
 
 
+import java.util.List;
 import java.util.Vector;
 
 
@@ -12,8 +13,7 @@ public class Cluster {
 	private String name;
 	private Centroid centroid;
 	private double sumSqr;
-	@SuppressWarnings("rawtypes")
-	private Vector dataPoints;
+	private Vector<Instance> Instances;
 
 
 	/**
@@ -21,11 +21,10 @@ public class Cluster {
 	 * by calling the method named setCentroid.
 	 * @param name String
 	 */
-	@SuppressWarnings("rawtypes")
 	public Cluster(String name) {
 		this.name = name;
-		this.centroid = null; //will be set by calling setCentroid()
-		dataPoints = new Vector();
+		this.centroid = null;
+		Instances = new Vector<Instance>();
 	}
 
 
@@ -48,59 +47,50 @@ public class Cluster {
 	/**
 	 * This method intrinsically calls the method that calculates the euclidean distance and
 	 * then calculates the sum of squares.
-	 * @param dp Datapoint object
+	 * @param dp Instance object
 	 */
-	@SuppressWarnings("unchecked")
-	public void addDataPoint(DataPoint dp) { 
+	public void addInstance(Instance dp) {
 		dp.setCluster(this);
-		this.dataPoints.addElement(dp);
+		this.Instances.addElement(dp);
 		calcSumOfSquares();
 	}
 
 	/**
 	 * This method removes the datapoind and updates the number of squares
-	 * @param dp Datapoint object
+	 * @param dp Instance object
 	 */
-	public void removeDataPoint(DataPoint dp) {
-		this.dataPoints.removeElement(dp);
+	public void removeInstance(Instance dp) {
+		this.Instances.removeElement(dp);
 		calcSumOfSquares();
 	}
 
 	/**
-	 * This method returns the number of datapoints
-	 * @return int number of datapoints 
+	 * This method returns the number of Instances
+	 * @return int number of Instances
 	 */
-	public int getNumDataPoints() {
-		return this.dataPoints.size();
+	public int getNumInstances() {
+		return this.Instances.size();
 	}
 
 	/**
 	 * This method returns an indexed data point
 	 * @param pos index
-	 * @return datapoint object
+	 * @return Instance object
 	 */
-	public DataPoint getDataPoint(int pos) {
-		return (DataPoint) this.dataPoints.elementAt(pos);
+	public Instance getInstance(int pos) {
+		return this.Instances.elementAt(pos);
 	}
 
 	/**
 	 * This method calculates the sum of squares
 	 */
 	public void calcSumOfSquares() {
-		int size = this.dataPoints.size();
+		int size = this.Instances.size();
 		double temp = 0;
 		for (int i = 0; i < size; i++) {
-			temp = temp + ((DataPoint) this.dataPoints.elementAt(i)).getCurrentEuDt();
+			temp = temp + (this.Instances.elementAt(i)).getCurrentEuDt();
 		}
 		this.sumSqr = temp;
-	}
-
-	/**
-	 * This method return the sum of squares
-	 * @return double value that represents the number of squares
-	 */
-	public double getSumSqr() {
-		return this.sumSqr;
 	}
 
 	/**
@@ -112,12 +102,37 @@ public class Cluster {
 	}
 
 	/**
-	 * This method returns a vector of datapoints
-	 * @return Vector of datapoints
+	 * This method returns a vector of Instances
+	 * @return Vector of Instances
 	 */
-	@SuppressWarnings("rawtypes")
-	public Vector getDataPoints() {
-		return this.dataPoints;
+	public Vector<Instance> getInstances() {
+		return this.Instances;
+	}
+
+	/**
+	 * Removes all Instances from the Cluster
+	 */
+	public void clear() {
+		Instances.clear();
+		calcSumOfSquares();
+	}
+
+	/**
+	 * Adds all instances to the Cluster
+	 * @param tmpLst Instances to add
+	 */
+	public void addAll(List<Instance> list) {
+		Instances.addAll(list);
+		calcSumOfSquares();
+	}
+
+	/**
+	 * Checks if the Cluster contains a specific Instance 
+	 * @param p The instance to check
+	 * @return True if contained
+	 */
+	public boolean contains(Instance p) {
+		return Instances.contains(p);
 	}
 
 }

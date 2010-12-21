@@ -1,43 +1,41 @@
 package it.unibz.gui;
 
 import it.unibz.algorithms.Utility;
-import it.unibz.algorithms.types.DataPoint;
 import it.unibz.algorithms.types.DataSet;
+import it.unibz.algorithms.types.Instance;
 import it.unibz.algorithms.types.Row;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Event;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.Event;
-import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.KeyStroke;
-import java.awt.Point;
-
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JFrame;
-import javax.swing.JDialog;
-import javax.swing.JRadioButton;
-import javax.swing.JDesktopPane;
-
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 /**
  * This class is the initialization of our program. It is in great part
@@ -45,7 +43,6 @@ import javax.swing.JComboBox;
  * responsible for creating all the GUI objects and attaching them behaviors.
  */
 public class Main {
-	// NEEDED FOT HE OPERATIONS
 	DataSet datas = null;
 
 	private JFrame jFrame = null; // @jve:decl-index=0:visual-constraint="10,10"
@@ -153,7 +150,7 @@ public class Main {
 		if (fileMenu == null) {
 			fileMenu = new JMenu();
 			fileMenu.setText("File");
-			fileMenu.add(getSaveMenuItem());
+			fileMenu.add(getLoadMenuItem());
 			fileMenu.add(getExitMenuItem());
 		}
 		return fileMenu;
@@ -261,18 +258,21 @@ public class Main {
 	 * 
 	 * @return javax.swing.JMenuItem
 	 */
-	private JMenuItem getSaveMenuItem() {
+	private JMenuItem getLoadMenuItem() {
 		if (loadMenuItem == null) {
 			loadMenuItem = new JMenuItem();
 			loadMenuItem.setText("Open");
-			loadMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+			loadMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					Event.CTRL_MASK, true));
 			loadMenuItem.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					OpenFileDialog d = new OpenFileDialog();
+					if(d.isFileSelected()){
 					String returnVal = d.getFilePath();
 					try {
 						datas = Utility.loadDataSet(returnVal);
+						jNrElementsLabel9.setText(datas.getData().size()+" Rows");
+						jNrSkippedRowsLabel9.setText(datas.getSkippedamount()+" Skipped Rows (missing value)");
 						Row r = datas.getAttributes();
 						jXComboBox.removeAllItems();
 						jYComboBox.removeAllItems();
@@ -284,15 +284,20 @@ public class Main {
 						jKMeansRadioButton.setSelected(true);
 						UpdateControls(false);
 					} catch (Exception e1) {
+						jNrElementsLabel9.setText("0 Rows");
+						jNrSkippedRowsLabel9.setText("0 Skipped Rows (missing value)");
+						String message = "There has been an error loading your dataset! Check your file for formatting issues!";
+						if(e1.getMessage().contains("ALLMISSING"))
+							message="All imported lines contain missing values!";
 						datas = null;
-						UpdateControls(false);
-						jXComboBox.removeAll();
-						jYComboBox.removeAll();
+						DisableAll();
+						jXComboBox.removeAllItems();
+						jYComboBox.removeAllItems();
 						JOptionPane
-								.showMessageDialog(
-										jFrame,
-										"There has been an error loading your dataset! Check your file for formatting issues!");
+						.showMessageDialog(
+								jFrame,message);
 					}
+				}
 				}
 			});
 		}
@@ -306,6 +311,15 @@ public class Main {
 	 */
 	private JDesktopPane getJDesktopPane() {
 		if (jDesktopPane == null) {
+			jNrSkippedRowsLabel9 = new JLabel();
+			jNrSkippedRowsLabel9.setBounds(new Rectangle(506, 134, 208, 31));
+			jNrSkippedRowsLabel9.setText("0 Skipped Rows (missing value)");
+			jNrElementsLabel9 = new JLabel();
+			jNrElementsLabel9.setBounds(new Rectangle(507, 106, 206, 16));
+			jNrElementsLabel9.setText("0 Rows");
+			jLabel8 = new JLabel();
+			jLabel8.setBounds(new Rectangle(532, 81, 150, 16));
+			jLabel8.setText("About your DataSet:");
 			jLabel7 = new JLabel();
 			jLabel7.setBounds(new Rectangle(231, 144, 121, 16));
 			jLabel7.setEnabled(false);
@@ -357,6 +371,9 @@ public class Main {
 			jDesktopPane.add(getJYComboBox(), null);
 			jDesktopPane.add(getJNRIterationsTextField(), null);
 			jDesktopPane.add(jLabel7, null);
+			jDesktopPane.add(jLabel8, null);
+			jDesktopPane.add(jNrElementsLabel9, null);
+			jDesktopPane.add(jNrSkippedRowsLabel9, null);
 		}
 		return jDesktopPane;
 	}
@@ -373,11 +390,11 @@ public class Main {
 			jKMeansRadioButton.setSelected(true);
 			jKMeansRadioButton.setText("K - Means");
 			jKMeansRadioButton
-					.addItemListener(new java.awt.event.ItemListener() {
-						public void itemStateChanged(java.awt.event.ItemEvent e) {
-							UpdateControls(true);
-						}
-					});
+			.addItemListener(new java.awt.event.ItemListener() {
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
+					UpdateControls(true);
+				}
+			});
 		}
 		return jKMeansRadioButton;
 	}
@@ -394,11 +411,11 @@ public class Main {
 			jDBSCANRadioButton.setText("DBSCAN");
 
 			jDBSCANRadioButton
-					.addItemListener(new java.awt.event.ItemListener() {
-						public void itemStateChanged(java.awt.event.ItemEvent e) {
-							UpdateControls(false);
-						}
-					});
+			.addItemListener(new java.awt.event.ItemListener() {
+				public void itemStateChanged(java.awt.event.ItemEvent e) {
+					UpdateControls(false);
+				}
+			});
 		}
 		return jDBSCANRadioButton;
 	}
@@ -464,11 +481,11 @@ public class Main {
 			jExecuteButton.setBounds(new Rectangle(297, 242, 145, 35));
 			jExecuteButton.setText("Execute");
 			jExecuteButton
-					.addActionListener(new java.awt.event.ActionListener() {
-						public void actionPerformed(java.awt.event.ActionEvent e) {
-							ExecuteAlgo();
-						}
-					});
+			.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					ExecuteAlgo();
+				}
+			});
 		}
 		return jExecuteButton;
 	}
@@ -575,6 +592,17 @@ public class Main {
 
 	private JLabel jLabel7 = null;
 
+	private void DisableAll(){
+		jLabel2.setEnabled(false);
+		jLabel3.setEnabled(false);
+		jLabel7.setEnabled(false);
+		jMinPointsLabel4.setEnabled(false);
+		jNRClustersTextField.setEnabled(false);
+		jNRIterationsTextField.setEnabled(false);
+		jEpsilonTextField.setEnabled(false);
+		jMinPtsTextField.setEnabled(false);
+	}
+	
 	/**
 	 * Method used to update the visual controls
 	 */
@@ -633,9 +661,9 @@ public class Main {
 				if (jNRClustersTextField.getText().trim().length() <= 0
 						&& Integer.parseInt(jNRClustersTextField.getText()
 								.trim()) <= 0
-						&& jNRIterationsTextField.getText().trim().length() >= 0
-						&& Integer.parseInt(jNRIterationsTextField.getText()
-								.trim()) >= 0)
+								&& jNRIterationsTextField.getText().trim().length() >= 0
+								&& Integer.parseInt(jNRIterationsTextField.getText()
+										.trim()) >= 0)
 					return;
 			} else if (jEpsilonTextField.getText().trim().length() <= 0
 					&& jMinPtsTextField.getText().trim().length() >= 0)
@@ -648,32 +676,32 @@ public class Main {
 				public void run() {
 					String xvalue = null;
 					String yvalue = null;
-					Vector<DataPoint> dataPoints = new Vector<DataPoint>();
+					Vector<Instance> Instances = new Vector<Instance>();
 					ArrayList<Row> rows = datas.getData();
 					for (int i = 0; i < rows.size(); i++) {
 						xvalue = rows.get(i).getValue(
 								jXComboBox.getSelectedIndex());
 						yvalue = rows.get(i).getValue(
 								jYComboBox.getSelectedIndex());
-						dataPoints.add(new DataPoint(isDouble(xvalue) ? xvalue
+						Instances.add(new Instance(isDouble(xvalue) ? xvalue
 								: String.valueOf(i), isDouble(yvalue) ? yvalue
-								: String.valueOf(i)));
+										: String.valueOf(i)));
 					}
 					if (kmeansselected) {
 
 						((ProgressGui) newContentPane).startupKMeans(
-								dataPoints, Integer
-										.parseInt(jNRClustersTextField
-												.getText()), Integer
+								Instances, Integer
+								.parseInt(jNRClustersTextField
+										.getText()), Integer
 										.parseInt(jNRIterationsTextField
 												.getText()));
 
 					} else {
 						try {
 							((ProgressGui) newContentPane).startupDBScan(
-									dataPoints, Integer
-											.parseInt(jEpsilonTextField
-													.getText()), Integer
+									Instances, Integer
+									.parseInt(jEpsilonTextField
+											.getText()), Integer
 											.parseInt(jMinPtsTextField
 													.getText()));
 						} catch (Exception e) {
@@ -689,6 +717,12 @@ public class Main {
 
 	private JComponent newContentPane = null;
 	private JDialog frame = null;
+
+	private JLabel jLabel8 = null;
+
+	private JLabel jNrElementsLabel9 = null;
+
+	private JLabel jNrSkippedRowsLabel9 = null;
 
 	/**
 	 * Create the GUI and show it. As with all GUI code, this must run on the

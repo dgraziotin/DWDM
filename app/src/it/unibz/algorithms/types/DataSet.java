@@ -7,10 +7,25 @@ import java.util.ArrayList;
  * It contains the dataset name, the attributes names and a list of values.
  */
 public class DataSet {
-	
+
 	private String name;
 	private Row attributes;
 	private ArrayList<Row> data;
+	private int skippedamount=0;
+
+	/**
+	 * Returns the amount of skipped items
+	 */
+	public int getSkippedamount() {
+		return skippedamount;
+	}
+
+	/**
+	 * Increments the number of skipped items
+	 */
+	public void incSkippedamount() {
+		this.skippedamount++;
+	}
 
 	/**
 	 * The constructor that initialize to null all class attributes
@@ -19,6 +34,7 @@ public class DataSet {
 		name = null;
 		attributes= null;
 		data =  null;
+		skippedamount=0;
 	}
 
 	/**
@@ -29,7 +45,7 @@ public class DataSet {
 		this.name = s;
 	}
 
-	
+
 	/**
 	 * This method extract from a string the attribute name
 	 * @param s retrieved from an arff file
@@ -69,7 +85,7 @@ public class DataSet {
 
 
 	/**
-	 * This method returns the dataset name 
+	 * This method returns the dataset name
 	 * @return dataset name
 	 */
 	public String getName(){
@@ -79,6 +95,7 @@ public class DataSet {
 
 	/**
 	 * This method gives a verbose version of the dataset content
+	 * USED ONLY FOT TESTING
 	 * @return the dataset content
 	 */
 	public String print(){
