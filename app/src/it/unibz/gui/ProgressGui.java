@@ -25,23 +25,37 @@ public class ProgressGui extends JPanel{
 	public JProgressBar progressBar;
 	
 	/**
-	 * @return the progressBar
-	 */
-	public JProgressBar getProgressBar() {
-		return progressBar;
-	}
-
-	/**
-	 * @param progressBar the progressBar to set
-	 */
-	public void setProgressBar(JProgressBar progressBar) {
-		this.progressBar = progressBar;
-	}
-
-	/**
 	 * A text area for outputting some text about the status
 	 */
 	private JTextArea taskProgress;
+	
+	/**
+	 * Sets up the GUI for progress bar and output
+	 * @param isKmeans
+	 * @param dataOutput
+	 */
+	public ProgressGui(boolean isKmeans, JTextArea dataOutput) {
+		super(new BorderLayout());
+		this.progressBar = new JProgressBar(0, 100);
+		this.progressBar.setValue(0);
+		this.progressBar.setStringPainted(true);
+
+		this.taskProgress = new JTextArea(5, 20);
+		this.taskProgress.setMargin(new Insets(5, 5, 5, 5));
+		this.taskProgress.setEditable(false);
+		
+		this.dataOutput = dataOutput;
+
+		JPanel panel = new JPanel();
+		panel.add(progressBar);
+		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+		this.add(panel, BorderLayout.PAGE_START);
+		this.add(new JScrollPane(taskProgress), BorderLayout.CENTER);
+		
+		
+		this.taskManager = new TaskManager(isKmeans, this);
+	}
 	
 	/**
 	 * @return the taskProgress
@@ -67,33 +81,6 @@ public class ProgressGui extends JPanel{
 	private JTextArea dataOutput;
 
 	/**
-	 * Sets up the GUI for progress bar and output
-	 * @param isKmeans
-	 * @param result
-	 */
-	public ProgressGui(boolean isKmeans, JTextArea dataOutput) {
-		super(new BorderLayout());
-		this.taskManager = new TaskManager(isKmeans);
-		this.progressBar = new JProgressBar(0, 100);
-		this.progressBar.setValue(0);
-		this.progressBar.setStringPainted(true);
-
-		this.taskProgress = new JTextArea(5, 20);
-		this.taskProgress.setMargin(new Insets(5, 5, 5, 5));
-		this.taskProgress.setEditable(false);
-		
-		this.dataOutput = dataOutput;
-
-		JPanel panel = new JPanel();
-		panel.add(progressBar);
-
-		add(panel, BorderLayout.PAGE_START);
-		add(new JScrollPane(taskProgress), BorderLayout.CENTER);
-		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-	}
-
-	/**
 	 * @param dataOutput the dataOutput to set
 	 */
 	public void setDataOutput(JTextArea dataOutput) {
@@ -108,13 +95,28 @@ public class ProgressGui extends JPanel{
 	}	
 	
 	/**
+	 * @return the progressBar
+	 */
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	/**
+	 * @param progressBar the progressBar to set
+	 */
+	public void setProgressBar(JProgressBar progressBar) {
+		this.progressBar = progressBar;
+	}
+
+	
+	/**
 	 * Method responsible for invoking the KMeans algorithm inside a task (a thread)
 	 * @param dataPoints
 	 * @param parseInt
 	 * @param parseInt2
 	 */
-	public void StartupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
-		taskManager.StartupKMeans(dataPoints, parseInt, parseInt2);
+	public void startupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
+		taskManager.startupKMeans(dataPoints, parseInt, parseInt2);
 	}
 	
 	/**
@@ -123,12 +125,12 @@ public class ProgressGui extends JPanel{
 	 * @param e
 	 * @param minp
 	 */
-	public void StartupDBScan(List<DataPoint> dataPoints, int e, int minp) {
-		taskManager.StartupDBScan(dataPoints, e, minp);
+	public void startupDBScan(List<DataPoint> dataPoints, int e, int minp) {
+		taskManager.startupDBScan(dataPoints, e, minp);
 	}
 	
-	public void killprocess(){
-		taskManager.killprocess();
+	public void killProcess(){
+		taskManager.killProcess();
 	}
 
 	

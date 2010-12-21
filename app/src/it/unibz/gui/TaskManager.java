@@ -27,8 +27,9 @@ public class TaskManager implements PropertyChangeListener {
 	 */
 	private ProgressGui progressGui;
 
-	public TaskManager(boolean isKmeans) {
+	public TaskManager(boolean isKmeans, ProgressGui progressGui) {
 		this.isKmeans = isKmeans;
+		this.progressGui = progressGui;
 	}
 	
 	/**
@@ -37,7 +38,7 @@ public class TaskManager implements PropertyChangeListener {
 	 * @param parseInt
 	 * @param parseInt2
 	 */
-	public void StartupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
+	public void startupKMeans(Vector<DataPoint> dataPoints, int parseInt, int parseInt2) {
 		this.task = new KMeans(parseInt, parseInt2, dataPoints);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
@@ -49,7 +50,7 @@ public class TaskManager implements PropertyChangeListener {
 	 * @param e
 	 * @param minp
 	 */
-	public void StartupDBScan(List<DataPoint> dataPoints, int e, int minp) {
+	public void startupDBScan(List<DataPoint> dataPoints, int e, int minp) {
 		this.task = new DBScan(dataPoints, e, minp);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
@@ -80,7 +81,7 @@ public class TaskManager implements PropertyChangeListener {
 	/**
 	 * Attempts to kill the task (the thread)
 	 */
-	public void killprocess() {
+	public void killProcess() {
 		task.cancel(true);
 	}
 	

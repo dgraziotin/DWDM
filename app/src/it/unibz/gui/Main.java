@@ -661,7 +661,7 @@ public class Main {
 					}
 					if (kmeansselected) {
 
-						((ProgressGui) newContentPane).StartupKMeans(
+						((ProgressGui) newContentPane).startupKMeans(
 								dataPoints, Integer
 										.parseInt(jNRClustersTextField
 												.getText()), Integer
@@ -670,7 +670,7 @@ public class Main {
 
 					} else {
 						try {
-							((ProgressGui) newContentPane).StartupDBScan(
+							((ProgressGui) newContentPane).startupDBScan(
 									dataPoints, Integer
 											.parseInt(jEpsilonTextField
 													.getText()), Integer
@@ -722,7 +722,7 @@ public class Main {
 
 			@Override
 			public void windowClosed(WindowEvent arg0) {
-				((ProgressGui) newContentPane).killprocess();
+				((ProgressGui) newContentPane).killProcess();
 			}
 
 			@Override

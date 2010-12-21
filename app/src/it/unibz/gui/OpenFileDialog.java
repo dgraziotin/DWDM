@@ -54,16 +54,7 @@ public class OpenFileDialog {
 	public String getFilePath() {
 		return filePath;
 	}
-
-	/**
-	 * If a file was selected this returns a true.
-	 * 
-	 * @return true file was selected else a false
-	 */
-	public boolean isFileSelected() {
-		return isFileSelected;
-	}
-
+	
 	/**
 	 * Allows setting of the file path
 	 * 
@@ -74,4 +65,14 @@ public class OpenFileDialog {
 		filePath = fpath;
 		isFileSelected = true;
 	}
+
+	/**
+	 * If a file was selected this returns a true.
+	 * 
+	 * @return true file was selected else a false
+	 */
+	public boolean isFileSelected() {
+		return isFileSelected;
+	}
+
 }
