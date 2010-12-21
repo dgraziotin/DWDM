@@ -94,7 +94,6 @@ public class KMeans  extends SwingWorker<Void,Void>{
 			return null;
 		//Step 4
 		refreshCentroids();
-try{
 		for (int i = 0; i < numberiterations; i++) {
 			for (int j = 0; j < clusters.size(); j++) {
 				for (int k = 0; k < clusters.get(j).getNumInstances(); k++) {
@@ -105,9 +104,9 @@ try{
 					boolean toreassign = false;
 					//Look if cluster has to be reassigned
 					for (int l = 0; l < clusters.size(); l++) {
-						if (currentED > clusters.get(j).getInstance(k).testEuclideanDistance(clusters.get(j).getCentroid())) {
-							currentED = clusters.get(j).getInstance(k).testEuclideanDistance(clusters.get(j).getCentroid());
-							temp = clusters.get(j);
+						if (currentED > clusters.get(j).getInstance(k).testEuclideanDistance(clusters.get(l).getCentroid())) {
+							currentED = clusters.get(j).getInstance(k).testEuclideanDistance(clusters.get(l).getCentroid());
+							temp = clusters.get(l);
 							toreassign = true;
 						}
 					}
@@ -117,19 +116,15 @@ try{
 						clusters.get(j).removeInstance(clusters.get(j).getInstance(k));
 						refreshCentroids();
 						//Refresh progress
-						setProgress(Math.min(Math.round((float)(i+1*j+1*k*100)/(n)), 100));
+						setProgress(Math.min(Math.round((float)(i+1*j+1*(k+1)*100)/(n)), 100));
 					}
 				}
 			}
 		}
-}
-catch(Exception e){
-	e.printStackTrace();
-}
 		setProgress(100);
 		return null;
 	}
-
+	
 	/**
 	 * Method refreshes all clusters centroid
 	 */
