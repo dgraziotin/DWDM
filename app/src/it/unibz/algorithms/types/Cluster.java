@@ -117,4 +117,27 @@ public class Cluster {
 		return Instances.contains(p);
 	}
 
+
+	public int getNumOfMinAndMaxXY() {
+		int amount=0;
+		double x1=0,y1=0;
+		double x2=0,y2=0;
+		for (int i = 0; i < Instances.size(); i++) {
+			Instance dp = Instances.elementAt(i);
+			if(dp.getX() > x1)
+				{x1=dp.getX();
+			amount++;}
+			if(dp.getX() < x2)
+			{x2=dp.getX();
+			amount++;}
+			if(dp.getY() > y1)
+			{y1=dp.getY();
+		amount++;}
+		if(dp.getY() < y2)
+		{y2=dp.getY();
+		amount++;}
+			
+		}		return amount;
+	}
+
 }

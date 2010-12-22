@@ -290,7 +290,7 @@ public class Main {
 						jNrSkippedRowsLabel9.setText("0 Skipped Rows (missing value)");
 						jOutputTextArea.setText("");
 						String message = "There has been an error loading your dataset! Check your file for formatting issues!";
-						if(e1.getMessage().contains("ALLMISSING"))
+						if(e1.getMessage()!=null &&e1.getMessage().contains("ALLMISSING"))
 							message="All imported lines contain missing values!";
 						datas = null;
 						DisableAll();

@@ -22,6 +22,8 @@ public class TaskManager implements PropertyChangeListener {
 	 * Boolean to indicate when we are dealing with Kmean algorithm
 	 */
 	private boolean isKmeans;
+	//Used for showing noise removal
+	private int k=0;
 	/**
 	 * 
 	 */
@@ -39,6 +41,7 @@ public class TaskManager implements PropertyChangeListener {
 	 * @param parseInt2
 	 */
 	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2) {
+		k=parseInt;
 		this.task = new KMeans(parseInt, parseInt2, Instances);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
@@ -71,9 +74,13 @@ public class TaskManager implements PropertyChangeListener {
 				if (!isKmeans)
 					progressGui.getDataOutput().setText(Utility.display(((DBScan) this.task)
 							.getClusters(),true));
-				else
-					progressGui.getDataOutput().setText(Utility.display(((KMeans) this.task)
+				else{
+					progressGui.getDataOutput().setText("");
+					if(k!=((KMeans) this.task).getClusters().size())
+						progressGui.getDataOutput().setText((k-((KMeans) this.task).getClusters().size())+" Clusters removed due to noise");
+					progressGui.getDataOutput().append(Utility.display(((KMeans) this.task)
 							.getClusters(),false));
+				}
 				((JDialog) progressGui.getParent().getParent().getParent())
 				.dispose();
 			}

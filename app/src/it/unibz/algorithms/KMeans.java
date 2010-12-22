@@ -84,6 +84,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 		setProgress(0);
 		//Step 1
 		initializeCentroids();
+		List<Cluster> tempclusters =new ArrayList<Cluster>();
 		//Step 2 + 3
 		randomAssign();
 		//Retrieve number of iteration to do (for ProgressBar)
@@ -120,7 +121,25 @@ public class KMeans  extends SwingWorker<Void,Void>{
 					}
 				}
 			}
+				tempclusters=new ArrayList<Cluster>();
+				//NOW Start modified KMeans to take care of outliers
+				for (int j = 0; j < clusters.size(); j++) {
+					if (isCancelled())
+						return null;
+					// Find corners of compactness based on instances with 
+					// minimum and maximum X and Y values
+					
+					int compactness=clusters.get(j).getNumInstances()/(clusters.get(j).getNumOfMinAndMaxXY());
+					// Calculate cluster compactness =number of data points / compactness window size
+					if(compactness>instances.size()/clusters.size())
+					{
+						// Remove cluster	
+						tempclusters.add(clusters.get(j));
+						
+					}
+			}
 		}
+		clusters.removeAll(tempclusters);
 		setProgress(100);
 		return null;
 	}
