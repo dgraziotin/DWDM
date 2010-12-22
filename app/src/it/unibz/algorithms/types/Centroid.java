@@ -41,7 +41,6 @@ public class Centroid {
 		for (i = 0; i < Instances; i++) {
 			cluster.getInstance(i).calcEuclideanDistance();
 		}
-		cluster.calcSumOfSquares();
 	}
 
 	/**

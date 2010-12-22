@@ -104,6 +104,7 @@ public class Main {
 			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			jFrame.setJMenuBar(getJJMenuBar());
 			jFrame.setSize(741, 487);
+			jFrame.setResizable(false);
 			jFrame.setContentPane(getJContentPane());
 			jFrame.setTitle("DWDM Project PART II");
 			UpdateControls(false);

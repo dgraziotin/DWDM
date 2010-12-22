@@ -12,7 +12,6 @@ import java.util.Vector;
 public class Cluster {
 	private String name;
 	private Centroid centroid;
-	private double sumSqr;
 	private Vector<Instance> Instances;
 
 
@@ -45,23 +44,20 @@ public class Cluster {
 	}
 
 	/**
-	 * This method intrinsically calls the method that calculates the euclidean distance and
-	 * then calculates the sum of squares.
+	 * The method adds a specific Instance to the Cluster
 	 * @param dp Instance object
 	 */
 	public void addInstance(Instance dp) {
 		dp.setCluster(this);
 		this.Instances.addElement(dp);
-		calcSumOfSquares();
 	}
 
 	/**
-	 * This method removes the datapoind and updates the number of squares
+	 * This method removes the Instance
 	 * @param dp Instance object
 	 */
 	public void removeInstance(Instance dp) {
 		this.Instances.removeElement(dp);
-		calcSumOfSquares();
 	}
 
 	/**
@@ -79,18 +75,6 @@ public class Cluster {
 	 */
 	public Instance getInstance(int pos) {
 		return this.Instances.elementAt(pos);
-	}
-
-	/**
-	 * This method calculates the sum of squares
-	 */
-	public void calcSumOfSquares() {
-		int size = this.Instances.size();
-		double temp = 0;
-		for (int i = 0; i < size; i++) {
-			temp = temp + (this.Instances.elementAt(i)).getCurrentEuDt();
-		}
-		this.sumSqr = temp;
 	}
 
 	/**
@@ -114,7 +98,6 @@ public class Cluster {
 	 */
 	public void clear() {
 		Instances.clear();
-		calcSumOfSquares();
 	}
 
 	/**
@@ -123,7 +106,6 @@ public class Cluster {
 	 */
 	public void addAll(List<Instance> list) {
 		Instances.addAll(list);
-		calcSumOfSquares();
 	}
 
 	/**

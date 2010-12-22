@@ -116,7 +116,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 						clusters.get(j).removeInstance(clusters.get(j).getInstance(k));
 						refreshCentroids();
 						//Refresh progress
-						setProgress(Math.min(Math.round((float)(i+1*j+1*(k+1)*100)/(n)), 100));
+						setProgress(Math.min(Math.round((float)(i*j*k*100)/(n))+1, 100));
 					}
 				}
 			}
