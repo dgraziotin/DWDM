@@ -82,9 +82,9 @@ public class KMeans  extends SwingWorker<Void,Void>{
 	@Override
 	protected Void doInBackground() throws Exception {
 		setProgress(0);
+		int progress=0;
 		//Step 1
 		initializeCentroids();
-		List<Cluster> tempclusters =new ArrayList<Cluster>();
 		//Step 2 + 3
 		randomAssign();
 		//Retrieve number of iteration to do (for ProgressBar)
@@ -100,6 +100,9 @@ public class KMeans  extends SwingWorker<Void,Void>{
 				for (int k = 0; k < clusters.get(j).getNumInstances(); k++) {
 					if (isCancelled())
 						return null;
+					//Refresh progress
+					progress=Math.max((Math.round((float)((i+1)*(j+1)*(k+1)*100)/(n))+1),progress);
+					setProgress(Math.min(progress, 100));
 					double currentED = clusters.get(j).getInstance(k).getCurrentEuDt();
 					Cluster temp = null;
 					boolean toreassign = false;
@@ -116,14 +119,9 @@ public class KMeans  extends SwingWorker<Void,Void>{
 						temp.addInstance(clusters.get(j).getInstance(k));
 						clusters.get(j).removeInstance(clusters.get(j).getInstance(k));
 						refreshCentroids();
-						//Refresh progress
-						setProgress(Math.min(Math.round((float)(i*j*k*100)/(n))+1, 100));
 					}
 				}
-			}
-				tempclusters=new ArrayList<Cluster>();
-				//NOW Start modified KMeans to take care of outliers
-				for (int j = 0; j < clusters.size(); j++) {
+			
 					if (isCancelled())
 						return null;
 					// Find corners of compactness based on instances with 
@@ -132,14 +130,11 @@ public class KMeans  extends SwingWorker<Void,Void>{
 					int compactness=clusters.get(j).getNumInstances()/(clusters.get(j).getNumOfMinAndMaxXY());
 					// Calculate cluster compactness =number of data points / compactness window size
 					if(compactness>instances.size()/clusters.size())
-					{
-						// Remove cluster	
-						tempclusters.add(clusters.get(j));
-						
-					}
+						clusters.get(j).setIsnoise(true);
+					else
+						clusters.get(j).setIsnoise(false);
 			}
 		}
-		clusters.removeAll(tempclusters);
 		setProgress(100);
 		return null;
 	}

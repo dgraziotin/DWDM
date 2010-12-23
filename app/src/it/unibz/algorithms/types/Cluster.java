@@ -12,6 +12,8 @@ import java.util.Vector;
 public class Cluster {
 	private String name;
 	private Centroid centroid;
+	private boolean isnoise=false;
+
 	private Vector<Instance> Instances;
 
 
@@ -67,6 +69,20 @@ public class Cluster {
 	public int getNumInstances() {
 		return this.Instances.size();
 	}
+	
+	/**
+	 * Getter for the isnoise Property
+	 */
+	public boolean isIsnoise() {
+		return isnoise;
+	}
+
+	/**
+	 * Setter for the isnoise Property
+	 */
+	public void setIsnoise(boolean isnoise) {
+		this.isnoise = isnoise;
+	}
 
 	/**
 	 * This method returns an indexed data point
@@ -82,7 +98,7 @@ public class Cluster {
 	 * @return String cluster name
 	 */
 	public String getName() {
-		return this.name;
+		return this.name+(isnoise?" (Noisy cluster)":"");
 	}
 
 	/**
