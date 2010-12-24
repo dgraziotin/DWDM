@@ -3,7 +3,6 @@ package it.unibz.algorithms;
 
 import it.unibz.algorithms.types.Cluster;
 import it.unibz.algorithms.types.DataSet;
-import it.unibz.algorithms.types.Instance;
 import it.unibz.algorithms.types.Row;
 
 import java.io.BufferedReader;
@@ -77,9 +76,8 @@ public  class Utility {
 				continue;
 			}
 			result+=("----- "+(rename?"Cluster "+index:temp.getName())+" -----\n");
-			for(Iterator<Instance> it1=temp.getInstances().iterator();it1.hasNext();){
-				Instance p=it1.next();
-				result+=(p.print());
+			for(int i=0;i<temp.getNumInstances();i++){
+				result+=(temp.getInstance(i).print());
 			}
 			result+="\n";
 			index++;

@@ -39,10 +39,11 @@ public class TaskManager implements PropertyChangeListener {
 	 * @param Instances
 	 * @param parseInt
 	 * @param parseInt2
+	 * @param clearnoise
 	 */
-	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2) {
+	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2, boolean clearnoise) {
 		k=parseInt;
-		this.task = new KMeans(parseInt, parseInt2, Instances);
+		this.task = new KMeans(parseInt, parseInt2, Instances,clearnoise);
 		this.task.addPropertyChangeListener(this);
 		this.task.execute();
 	}

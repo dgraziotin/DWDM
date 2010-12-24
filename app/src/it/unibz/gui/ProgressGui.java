@@ -120,8 +120,8 @@ public class ProgressGui extends JPanel{
 	 * @param parseInt
 	 * @param parseInt2
 	 */
-	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2) {
-		taskManager.startupKMeans(Instances, parseInt, parseInt2);
+	public void startupKMeans(Vector<Instance> Instances, int parseInt, int parseInt2, boolean clearnoise) {
+		taskManager.startupKMeans(Instances, parseInt, parseInt2,clearnoise);
 	}
 
 	/**

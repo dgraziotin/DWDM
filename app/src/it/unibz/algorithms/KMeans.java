@@ -18,16 +18,18 @@ import javax.swing.SwingWorker;
 public class KMeans  extends SwingWorker<Void,Void>{
 	private static List<Cluster> clusters;
 	private int numberiterations;
+	private boolean clearnoise;
 	private Vector<Instance> instances = new Vector<Instance>();
 	/**
 	 * Base constructor initializes the needed Clusters
 	 */
-	public KMeans(int k, int iter, Vector<Instance> instances) {
+	public KMeans(int k, int iter, Vector<Instance> instances,boolean clearnoise) {
 		clusters = new ArrayList<Cluster>();
 		for (int i = 0; i < k; i++) {
 			clusters.add(new Cluster("Cluster " + (i+1)));
 		}
 		this.numberiterations = iter;
+		this.clearnoise=clearnoise;
 		this.instances = instances;
 	}
 
@@ -83,6 +85,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 	protected Void doInBackground() throws Exception {
 		setProgress(0);
 		int progress=0;
+		int compactness=0;
 		//Step 1
 		initializeCentroids();
 		//Step 2 + 3
@@ -102,7 +105,7 @@ public class KMeans  extends SwingWorker<Void,Void>{
 						return null;
 					//Refresh progress
 					progress=Math.max((Math.round((float)((i+1)*(j+1)*(k+1)*100)/(n))+1),progress);
-					setProgress(Math.min(progress, 100));
+					setProgress(Math.min(progress-1, 100));
 					double currentED = clusters.get(j).getInstance(k).getCurrentEuDt();
 					Cluster temp = null;
 					boolean toreassign = false;
@@ -121,18 +124,19 @@ public class KMeans  extends SwingWorker<Void,Void>{
 						refreshCentroids();
 					}
 				}
-			
+				if(clearnoise){
 					if (isCancelled())
 						return null;
 					// Find corners of compactness based on instances with 
 					// minimum and maximum X and Y values
 					
-					int compactness=clusters.get(j).getNumInstances()/(clusters.get(j).getNumOfMinAndMaxXY());
+					compactness=clusters.get(j).getNumInstances()/(clusters.get(j).getNumOfMinAndMaxXY());
 					// Calculate cluster compactness =number of data points / compactness window size
 					if(compactness>instances.size()/clusters.size())
 						clusters.get(j).setIsnoise(true);
 					else
 						clusters.get(j).setIsnoise(false);
+				}
 			}
 		}
 		setProgress(100);

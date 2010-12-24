@@ -88,7 +88,7 @@ public class DBScan extends SwingWorker<Void,Void>{
 					//Step 3
 					if(addNeighbors(clusters.get(i), clusters.get(j))){
 						clusters.get(j).clear();
-						setProgress(Math.min(Math.round((float)(i*j*100)/(length*length))+50, 100));
+						setProgress(Math.min(Math.round((float)(i*j*100)/(length*length))+49, 100));
 					}
 				}
 			}

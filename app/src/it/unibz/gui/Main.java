@@ -36,6 +36,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.JCheckBox;
 
 /**
  * This class is the initialization of our program. It is in great part
@@ -103,7 +104,7 @@ public class Main {
 			jFrame = new JFrame();
 			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			jFrame.setJMenuBar(getJJMenuBar());
-			jFrame.setSize(741, 487);
+			jFrame.setSize(741, 500);
 			jFrame.setResizable(false);
 			jFrame.setContentPane(getJContentPane());
 			jFrame.setTitle("DWDM Project PART II");
@@ -314,6 +315,10 @@ public class Main {
 	 */
 	private JDesktopPane getJDesktopPane() {
 		if (jDesktopPane == null) {
+			jLabel9 = new JLabel();
+			jLabel9.setBounds(new Rectangle(231, 163, 121, 16));
+			jLabel9.setEnabled(false);
+			jLabel9.setText("Take care of noise: ");
 			jNrSkippedRowsLabel9 = new JLabel();
 			jNrSkippedRowsLabel9.setBounds(new Rectangle(506, 134, 208, 31));
 			jNrSkippedRowsLabel9.setText("0 Skipped Rows (missing value)");
@@ -324,7 +329,7 @@ public class Main {
 			jLabel8.setBounds(new Rectangle(532, 81, 150, 16));
 			jLabel8.setText("About your DataSet:");
 			jLabel7 = new JLabel();
-			jLabel7.setBounds(new Rectangle(231, 144, 121, 16));
+			jLabel7.setBounds(new Rectangle(231, 138, 121, 16));
 			jLabel7.setEnabled(false);
 			jLabel7.setText("Number of iterations:");
 			jLabel6 = new JLabel();
@@ -337,11 +342,11 @@ public class Main {
 			jLabel4.setBounds(new Rectangle(33, 271, 38, 16));
 			jLabel4.setText("Output");
 			jMinPointsLabel4 = new JLabel();
-			jMinPointsLabel4.setBounds(new Rectangle(265, 205, 81, 16));
+			jMinPointsLabel4.setBounds(new Rectangle(265, 213, 81, 16));
 			jMinPointsLabel4.setEnabled(false);
 			jMinPointsLabel4.setText("MinPoints:");
 			jLabel3 = new JLabel();
-			jLabel3.setBounds(new Rectangle(248, 175, 103, 16));
+			jLabel3.setBounds(new Rectangle(248, 191, 103, 16));
 			jLabel3.setEnabled(false);
 			jLabel3.setText("E - Neighbors:");
 			jLabel2 = new JLabel();
@@ -377,6 +382,8 @@ public class Main {
 			jDesktopPane.add(jLabel8, null);
 			jDesktopPane.add(jNrElementsLabel9, null);
 			jDesktopPane.add(jNrSkippedRowsLabel9, null);
+			jDesktopPane.add(getJClearNoiseCheckBox(), null);
+			jDesktopPane.add(jLabel9, null);
 		}
 		return jDesktopPane;
 	}
@@ -447,7 +454,7 @@ public class Main {
 	private JTextField getJEpsilonTextField() {
 		if (jEpsilonTextField == null) {
 			jEpsilonTextField = new JTextField();
-			jEpsilonTextField.setBounds(new Rectangle(358, 174, 100, 20));
+			jEpsilonTextField.setBounds(new Rectangle(358, 190, 100, 20));
 			jEpsilonTextField.setEnabled(false);
 			jEpsilonTextField.setDocument(new Jintfilter());
 			jEpsilonTextField.setText("2");
@@ -464,7 +471,7 @@ public class Main {
 	private JTextField getJMinPtsTextField() {
 		if (jMinPtsTextField == null) {
 			jMinPtsTextField = new JTextField();
-			jMinPtsTextField.setBounds(new Rectangle(358, 204, 100, 20));
+			jMinPtsTextField.setBounds(new Rectangle(358, 212, 100, 20));
 			jMinPtsTextField.setEnabled(false);
 			jMinPtsTextField.setDocument(new Jintfilter());
 			jMinPtsTextField.setText("4");
@@ -481,7 +488,7 @@ public class Main {
 	private JButton getJExecuteButton() {
 		if (jExecuteButton == null) {
 			jExecuteButton = new JButton();
-			jExecuteButton.setBounds(new Rectangle(297, 242, 145, 35));
+			jExecuteButton.setBounds(new Rectangle(296, 243, 145, 35));
 			jExecuteButton.setText("Execute");
 			jExecuteButton
 			.addActionListener(new java.awt.event.ActionListener() {
@@ -553,13 +560,28 @@ public class Main {
 	private JTextField getJNRIterationsTextField() {
 		if (jNRIterationsTextField == null) {
 			jNRIterationsTextField = new JTextField();
-			jNRIterationsTextField.setBounds(new Rectangle(358, 144, 100, 20));
+			jNRIterationsTextField.setBounds(new Rectangle(358, 138, 100, 20));
 			jNRIterationsTextField.setEnabled(false);
 			jNRIterationsTextField.setDocument(new Jintfilter());
 			jNRIterationsTextField.setText("2");
 
 		}
 		return jNRIterationsTextField;
+	}
+
+	/**
+	 * This method initializes jClearNoiseCheckBox	
+	 * 	
+	 * @return javax.swing.JCheckBox	
+	 */
+	private JCheckBox getJClearNoiseCheckBox() {
+		if (jClearNoiseCheckBox == null) {
+			jClearNoiseCheckBox = new JCheckBox();
+			jClearNoiseCheckBox.setBounds(new Rectangle(358, 159, 25, 24));
+			jClearNoiseCheckBox.setEnabled(false);
+			jClearNoiseCheckBox.setText("");
+		}
+		return jClearNoiseCheckBox;
 	}
 
 	/**
@@ -628,6 +650,8 @@ public class Main {
 			jLabel2.setEnabled(iskmeans);
 			jLabel3.setEnabled(!iskmeans);
 			jLabel7.setEnabled(iskmeans);
+			jLabel9.setEnabled(iskmeans);
+			jClearNoiseCheckBox.setEnabled(iskmeans);
 			jMinPointsLabel4.setEnabled(!iskmeans);
 			jNRClustersTextField.setEnabled(iskmeans);
 			jNRIterationsTextField.setEnabled(iskmeans);
@@ -637,6 +661,8 @@ public class Main {
 			jLabel2.setEnabled(false);
 			jLabel7.setEnabled(false);
 			jLabel3.setEnabled(false);
+			jLabel9.setEnabled(false);
+			jClearNoiseCheckBox.setEnabled(false);
 			jMinPointsLabel4.setEnabled(false);
 			jNRClustersTextField.setEnabled(false);
 			jNRIterationsTextField.setEnabled(false);
@@ -697,7 +723,7 @@ public class Main {
 								.parseInt(jNRClustersTextField
 										.getText()), Integer
 										.parseInt(jNRIterationsTextField
-												.getText()));
+												.getText()),jClearNoiseCheckBox.isSelected());
 
 					} else {
 						try {
@@ -726,6 +752,10 @@ public class Main {
 	private JLabel jNrElementsLabel9 = null;
 
 	private JLabel jNrSkippedRowsLabel9 = null;
+
+	private JCheckBox jClearNoiseCheckBox = null;
+
+	private JLabel jLabel9 = null;
 
 	/**
 	 * Create the GUI and show it. As with all GUI code, this must run on the
