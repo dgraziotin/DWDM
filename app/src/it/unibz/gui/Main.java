@@ -198,7 +198,7 @@ public class Main {
 	private JMenuItem getAboutMenuItem() {
 		if (aboutMenuItem == null) {
 			aboutMenuItem = new JMenuItem();
-			aboutMenuItem.setText("About");
+			aboutMenuItem.setText("Authors");
 			aboutMenuItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JDialog aboutDialog = getAboutDialog();
@@ -221,7 +221,7 @@ public class Main {
 	private JDialog getAboutDialog() {
 		if (aboutDialog == null) {
 			aboutDialog = new JDialog(getJFrame(), true);
-			aboutDialog.setTitle("About");
+			aboutDialog.setTitle("Authors");
 			aboutDialog.setContentPane(getAboutContentPane());
 		}
 		return aboutDialog;
@@ -249,7 +249,7 @@ public class Main {
 	private JLabel getAboutVersionLabel() {
 		if (aboutVersionLabel == null) {
 			aboutVersionLabel = new JLabel();
-			aboutVersionLabel.setText("Version 1.0");
+			aboutVersionLabel.setText("Daniel Hanspeter, Daniel Graziotin, Thomas Schievenin");
 			aboutVersionLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return aboutVersionLabel;

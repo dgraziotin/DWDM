@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="algorithms2" size="946,639" id="it.unibz.algorithms" metadata="uml2-1.0" initialized="true" scrolledY="27" tag="10" key="32303037303533312D3130204457444D50726F6A656374">
+  <children xsi:type="editmodel:ClassEditModel" name="KMeans" location="50,375" size="94,85" id="it.unibz.algorithms/KMeans">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="71,36">
+      <children xsi:type="editmodel:MethodEditModel" name="KMeans" id="it.unibz.algorithms/KMeans#KMeans(IILjava.util.Vector;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClusters" id="it.unibz.algorithms/KMeans#getClusters()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms/KMeans-Standard::Call->it.unibz.algorithms.types/Cluster*it.unibz.algorithms/KMeans-Standard::Instantiate->it.unibz.algorithms.types/Cluster*it.unibz.algorithms/KMeans-Soyatec::Import->it.unibz.algorithms.types/Cluster" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call, Instantiate»" size="100,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="94,13" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,172"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms/KMeans-Standard::Call->it.unibz.algorithms.types/Centroid*it.unibz.algorithms/KMeans-Standard::Instantiate->it.unibz.algorithms.types/Centroid*it.unibz.algorithms/KMeans-Soyatec::Import->it.unibz.algorithms.types/Centroid" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call, Instantiate»" size="100,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="51,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="41,131"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms/KMeans-Standard::Call->it.unibz.algorithms.types/Instance*it.unibz.algorithms/KMeans-Soyatec::Import->it.unibz.algorithms.types/Instance" source="//@children.0" target="//@children.3" targetEnd="//@children.0/@sourceConnections.2/@children.2" label="//@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="94,45" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,40"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="DBScan" location="745,234" size="94,85" id="it.unibz.algorithms/DBScan">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="71,36">
+      <children xsi:type="editmodel:MethodEditModel" name="DBScan" id="it.unibz.algorithms/DBScan#DBScan(Ljava.util.List;II)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClusters" id="it.unibz.algorithms/DBScan#getClusters()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms/DBScan-Standard::Call->it.unibz.algorithms.types/Cluster*it.unibz.algorithms/DBScan-Standard::Instantiate->it.unibz.algorithms.types/Cluster*it.unibz.algorithms/DBScan-Soyatec::Import->it.unibz.algorithms.types/Cluster" source="//@children.1" target="//@children.4" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call, Instantiate»" size="100,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,42" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="146,211"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms/DBScan-Standard::Call->it.unibz.algorithms.types/Instance*it.unibz.algorithms/DBScan-Soyatec::Import->it.unibz.algorithms.types/Instance" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.1/@children.2" label="//@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,72" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="135,75"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.3/@sourceConnections.1 //@children.0/@sourceConnections.1" name="Centroid" location="60,50" size="99,131" id="it.unibz.algorithms.types/Centroid">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="76,72">
+      <children xsi:type="editmodel:MethodEditModel" name="Centroid" id="it.unibz.algorithms.types/Centroid#Centroid(DD)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calcCentroid" id="it.unibz.algorithms.types/Centroid#calcCentroid()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClusterX" id="it.unibz.algorithms.types/Centroid#getClusterX()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClusterY" id="it.unibz.algorithms.types/Centroid#getClusterY()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Centroid-Standard::Call->it.unibz.algorithms.types/Cluster*it.unibz.algorithms.types/Centroid-Soyatec::Import->it.unibz.algorithms.types/Cluster" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,53" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,38"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Centroid-Standard::Call->it.unibz.algorithms.types/Instance" source="//@children.2" target="//@children.3" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Call»" size="23,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,102" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,23"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.1 //@children.4/@sourceConnections.1 //@children.0/@sourceConnections.2 //@children.2/@sourceConnections.1" name="Instance" location="381,380" size="135,239" id="it.unibz.algorithms.types/Instance">
+    <children xsi:type="editmodel:CompartmentEditModel" size="92,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="isClassed" id="it.unibz.algorithms.types/Instance#isClassed"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="isKey" id="it.unibz.algorithms.types/Instance#isKey"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="x" id="it.unibz.algorithms.types/Instance#x"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="y" id="it.unibz.algorithms.types/Instance#y"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="112,108">
+      <children xsi:type="editmodel:MethodEditModel" name="Instance" id="it.unibz.algorithms.types/Instance#Instance(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="calcEuclideanDistance" id="it.unibz.algorithms.types/Instance#calcEuclideanDistance()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getCurrentEuDt" id="it.unibz.algorithms.types/Instance#getCurrentEuDt()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="print" id="it.unibz.algorithms.types/Instance#print()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setKey" id="it.unibz.algorithms.types/Instance#setKey(Z)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="testEuclideanDistance" id="it.unibz.algorithms.types/Instance#testEuclideanDistance(Lit.unibz.algorithms.types.Centroid;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Instance-Standard::Call->it.unibz.algorithms.types/Cluster*it.unibz.algorithms.types/Instance-Soyatec::Import->it.unibz.algorithms.types/Cluster" source="//@children.3" target="//@children.4" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="72,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="61,257"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Instance-Standard::Call->it.unibz.algorithms.types/Centroid*it.unibz.algorithms.types/Instance-Soyatec::Import->it.unibz.algorithms.types/Centroid" source="//@children.3" target="//@children.2" targetEnd="//@children.3/@sourceConnections.1/@children.2" label="//@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,43" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,122"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.3/@sourceConnections.0 //@children.0/@sourceConnections.0 //@children.2/@sourceConnections.0" name="Cluster" location="392,65" size="146,257" id="it.unibz.algorithms.types/Cluster">
+    <children xsi:type="editmodel:CompartmentEditModel" size="69,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="it.unibz.algorithms.types/Cluster#name"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,180">
+      <children xsi:type="editmodel:MethodEditModel" name="Cluster" id="it.unibz.algorithms.types/Cluster#Cluster(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addAll" id="it.unibz.algorithms.types/Cluster#addAll(Ljava.util.List;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addInstance" id="it.unibz.algorithms.types/Cluster#addInstance(Lit.unibz.algorithms.types.Instance;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clear" id="it.unibz.algorithms.types/Cluster#clear()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="contains" id="it.unibz.algorithms.types/Cluster#contains(Lit.unibz.algorithms.types.Instance;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" id="it.unibz.algorithms.types/Cluster#getInstance(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstances" id="it.unibz.algorithms.types/Cluster#getInstances()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNumInstances" id="it.unibz.algorithms.types/Cluster#getNumInstances()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNumOfMinAndMaxXY" id="it.unibz.algorithms.types/Cluster#getNumOfMinAndMaxXY()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removeInstance" id="it.unibz.algorithms.types/Cluster#removeInstance(Lit.unibz.algorithms.types.Instance;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Cluster-Soyatec::Import->it.unibz.algorithms.types/Centroid" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="35,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,58" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,73"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="it.unibz.algorithms.types/Cluster-Standard::Call->it.unibz.algorithms.types/Instance*it.unibz.algorithms.types/Cluster-Soyatec::Import->it.unibz.algorithms.types/Instance" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.1/@children.2" label="//@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="55,10" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="41,257" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="52,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=4;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
