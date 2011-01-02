@@ -188,7 +188,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/00_overview.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/00_overview.png
 	lyxscale 30
 	scale 30
 
@@ -255,7 +255,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/01_loading.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/01_loading.png
 	lyxscale 30
 	scale 50
 
@@ -307,7 +307,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/02_popup.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/02_popup.png
 	lyxscale 30
 	scale 50
 
@@ -366,7 +366,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/03_layout.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/03_layout.png
 	lyxscale 30
 	scale 30
 
@@ -413,7 +413,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/04_progressbar.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/04_progressbar.png
 	lyxscale 30
 	scale 40
 
@@ -454,7 +454,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/05_output.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/05_output.png
 	lyxscale 30
 	scale 30
 
@@ -502,7 +502,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/bodom_lx/Projects/DWDM/app/docs/report/img/06_dbscan.png
+	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/06_dbscan.png
 	lyxscale 30
 	scale 30
 
@@ -891,6 +891,215 @@ Con: the distance measure in the function for finding neighbours is crucial.
 \begin_layout Itemize
 Con: varying densities affects the outcome of this algorithm (hierarchical
  data sets)
+\end_layout
+
+\begin_layout Subsection
+Benchmarking the algorithms (AMD Phenom 9600 Quad Core 2.6Ghz)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DataSet Type
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K-Means (20 Clusters, 2 Iterations)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+K-Means (20 C, 2 I, Noise removal)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+DBScan (5 as E, 20 as MinPoints)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BT (748 Rows)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4.5 ms
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5 ms
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7 ms
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BT*2 (1496 Rows)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30 ms
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33 ms
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3 Sec 498 ms
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CI/2 (15124 Rows)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3 Min 40 sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 Min 14 sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 Min 04 sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CI (27763 Rows)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9 Min 19 sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10 min 40 sec
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 Min 18 sec
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \end_body

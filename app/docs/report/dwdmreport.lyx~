@@ -889,7 +889,7 @@ Con: the distance measure in the function for finding neighbours is crucial.
 \end_layout
 
 \begin_layout Itemize
-Con: varying densities affect the outcome of this algorithm (hierarchical
+Con: varying densities affects the outcome of this algorithm (hierarchical
  data sets)
 \end_layout
 
