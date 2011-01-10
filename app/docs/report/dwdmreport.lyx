@@ -69,7 +69,7 @@ figs-within-sections
 
 \begin_layout Title
 Data Mining Project PT.
- 2 - k-means and DBSCAN analysis and implementation
+ 2 - K-Means and DBSCAN analysis and implementation
 \end_layout
 
 \begin_layout Author
@@ -78,8 +78,8 @@ Daniel Hanspeter, 6129 Daniel Graziotin, 4801 Thomas Schievenin, 5701
 
 \begin_layout Abstract
 This report is on the development and analysis of two Data Mining clustering
- algorithms, namely k-means clustering and DBSCAN, within an interactive
- graphical program in Java programming language.
+ algorithms, namely K-Means clustering and DBSCAN, within an interactive
+ graphical program written in Java programming language.
  This report is dived in three parts.
  In the first part we will present a usage section, explaining how to interact
  with the program.
@@ -100,8 +100,102 @@ Introduction
 The DWDM Project part II consists in implementing some Data Mining algorithms
  to get a deeper understanding of their behavior, their strengths and their
  weaknesses.
- We choosed to implement the K-Means and the DB-Scan algorithms performing
+ We choosed to implement the K-Means and the DBSCAN algorithms performing
  the same task and then we compared their behaviours.
+\end_layout
+
+\begin_layout Subsection
+Contents of the archive
+\end_layout
+
+\begin_layout Standard
+When un-compressed, the archive is organized in the following structure:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+- dwdmproject
+\end_layout
+
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- dwdmproject.pdf
+\end_layout
+
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- application
+\end_layout
+
+\begin_layout Plain Layout
+
+----- dwdmproject.jar
+\end_layout
+
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- datasets
+\end_layout
+
+\begin_layout Plain Layout
+
+---- blood-transfusion.arff
+\end_layout
+
+\begin_layout Plain Layout
+
+---- census-income.arff
+\end_layout
+
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- javadoc
+\end_layout
+
+\begin_layout Plain Layout
+
+---- index.html
+\end_layout
+
+\begin_layout Plain Layout
+
+---- many other
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+dwdmproject.jar is the Java Archive of the program we implemented, the datasets
+ sub-folder contains the two datasets on which we tested the application.
+ The javadoc subfolder contains the exported documentation of the program.
 \end_layout
 
 \begin_layout Subsection
@@ -109,7 +203,7 @@ Running the application for the first time
 \end_layout
 
 \begin_layout Standard
-First, launch the JAR file.
+First, we launch the JAR file.
  This can be done either by double clicking on the JAR file or by executing
  the below command in a console window:
 \end_layout
@@ -122,7 +216,7 @@ status open
 
 \begin_layout Plain Layout
 
-java -jar dmproject.jar
+java -jar dwdmproject.jar
 \end_layout
 
 \end_inset
@@ -146,29 +240,30 @@ Quick overview
 \begin_layout Standard
 As the application starts all features are disabled.
  This is because there is not a dataset loaded yet.
- The application is composed by the following parts:
+ The application main window, represented in Figure 1.1, is composed by the
+ following parts:
 \end_layout
 
 \begin_layout Enumerate
-Select Box Attributes: the user gets the possibility to select the attributes
+Attribute X + Attribute Y: we get the possibility to select the attributes
  on which the algoritms will perform their calculations;
 \end_layout
 
 \begin_layout Enumerate
-Preferred Algorithm: the user decides which algorithm to perform;
+Choose your algorithm: we select which algorithm to be run against the dataset
 \end_layout
 
 \begin_layout Enumerate
-Parameters: in case of K-Means algorithm selected, the available parameters
- to set are the number of clusters, the number of iterations and whether
+Set Parameters: in case of K-Means algorithm selected, the available parameters
+ to be set are the number of clusters, the number of iterations and whether
  to take care of noise.
- If the DB-Scan algorithm is selected, we have to specify only the values
+ If the DBSCAN algorithm is selected, we have to specify only the values
  for E-Neighbours and Min-Points;
 \end_layout
 
 \begin_layout Enumerate
-Dataset information: the program displays the number of rows loaded into
- memory and the number of skipped rows because of missing values;
+About your Dataset: it displays the number of rows loaded into memory and
+ the number of skipped rows because of missing values;
 \end_layout
 
 \begin_layout Enumerate
@@ -176,7 +271,7 @@ Execute: this bottom executes the selected algorithm;
 \end_layout
 
 \begin_layout Enumerate
-Output: algorithms' outcome.
+Out: algorithms' outcome.
 \end_layout
 
 \begin_layout Standard
@@ -188,7 +283,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/00_overview.png
+	filename img/00_overview.png
 	lyxscale 30
 	scale 30
 
@@ -236,12 +331,12 @@ census-income.arff
 \begin_inset Quotes eld
 \end_inset
 
-blood-transfusion
+blood-transfusion.arff
 \begin_inset Quotes erd
 \end_inset
 
-.arff provided as attachment.
- Note, the loading windows allows to import only arff file, otherwise our
+ provided as attachment.
+ Note, the loading window allows to import only arff file, otherwise our
  parser is not able to parse its content.
 \end_layout
 
@@ -250,12 +345,12 @@ blood-transfusion
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/01_loading.png
+	filename img/01_loading.png
 	lyxscale 30
 	scale 50
 
@@ -302,12 +397,12 @@ DataSet information
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/02_popup.png
+	filename img/02_popup.png
 	lyxscale 30
 	scale 50
 
@@ -361,12 +456,12 @@ relationship
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/03_layout.png
+	filename img/03_layout.png
 	lyxscale 30
 	scale 30
 
@@ -393,7 +488,7 @@ Selecting attributes
 \end_layout
 
 \begin_layout Itemize
-Click the Execute button;
+We click the Execute button;
 \end_layout
 
 \begin_layout Itemize
@@ -408,12 +503,12 @@ In case of big dataset size, the execution of the K-Means algorithm takes
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/04_progressbar.png
+	filename img/04_progressbar.png
 	lyxscale 30
 	scale 40
 
@@ -449,12 +544,12 @@ Once the progress bar finishes, the user sees the outcome of the K-Means
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/05_output.png
+	filename img/05_output.png
 	lyxscale 30
 	scale 30
 
@@ -481,13 +576,13 @@ K-Means outcome
 \end_layout
 
 \begin_layout Subsection
-How to run DB-Scan algorigthm
+How to run DBSCAN algorigthm
 \end_layout
 
 \begin_layout Standard
-The steps for executing the DB-Scan algorithm are basically the same of
- the K-Means algorithm.
- The only things that changen are the parameters to set.
+The steps for executing the DBSCAN algorithm are basically the same of the
+ K-Means algorithm.
+ The only things that change are the parameters to be set.
  In fact, we have to specify the number of E-Neighbors and the number of
  MinPoints.
 \end_layout
@@ -497,12 +592,12 @@ The steps for executing the DB-Scan algorithm are basically the same of
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/bodom_lx/Projects/DWDM/app/docs/report/img/06_dbscan.png
+	filename img/06_dbscan.png
 	lyxscale 30
 	scale 30
 
@@ -515,7 +610,7 @@ status collapsed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-DB-Scan Algorithm
+DBSCAN Algorithm
 \end_layout
 
 \end_inset
@@ -560,14 +655,28 @@ This is for a better separation of concerns.
  architecture of the system.
  It is a personalized version of the MVC pattern because we further separated
  the algorithms from the controller part, putting the non algorithm-related
- code in the gui package anyway.
+ code in the 
+\series bold
+gui
+\series default
+ package anyway.
  
 \series bold
  
 \series default
-The user interacts only with the gui component that, based on user input,
- calls the components of the algorithms package that will do some computation
- on data defined in the types package and return the result.
+The user interacts only with the 
+\series bold
+gui
+\series default
+ component that, based on user input, calls the components of the 
+\series bold
+algorithms
+\series default
+ package that will do some computation on data defined in the 
+\series bold
+types
+\series default
+ package and return the result.
 \end_layout
 
 \begin_layout Standard
@@ -610,8 +719,12 @@ General Architecture View of the System
 \end_layout
 
 \begin_layout Standard
-The gui package contains the Main class that is responsible for accessing
- the program and constructing the graphical user interface using Swing.
+The 
+\series bold
+gui
+\series default
+ package contains the Main class that is responsible for accessing the program
+ and constructing the graphical user interface using Swing.
  The Jintfilter is a specialization of Swing's Document object and is used
  for filtering user input on algorithm parameters.
  The OpenFileDialog class is a personalized dialog for opening the datasets,
@@ -623,12 +736,18 @@ The gui package contains the Main class that is responsible for accessing
 \end_layout
 
 \begin_layout Standard
-The algorithms package, better illustrated in Figure 2.1, contains the pure,
- type independant implementations of the clustering algorithms, k-means
- and DBSCAN.
- They make use of generalized data types defined in the types package, in
- order to have an abstraction of the data that could be loaded from any
- datasource, being it an ARFF file, a CSV, and XML or a Database.
+The 
+\series bold
+algorithms
+\series default
+ package, better illustrated in Figure 2.1, contains the pure, type independant
+ implementations of the clustering algorithms, K-Means and DBSCAN.
+ They make use of generalized data types defined in the 
+\series bold
+types
+\series default
+ package, in order to have an abstraction of the data that could be loaded
+ from any datasource, being it an ARFF file, a CSV, and XML or a Database.
  The Utility class actually contains the method for loading the datasets
  and converting them in objects declared in types package.
 \end_layout
@@ -666,8 +785,12 @@ Algorithms Package
 \end_layout
 
 \begin_layout Standard
-The types package, represented in Figure 2.3, contains pure Java representation
- of the data that can be loaded by the algorithms.
+The 
+\series bold
+types
+\series default
+ package, represented in Figure 2.3, contains pure Java representation of
+ the data that can be loaded by the algorithms.
  They are an abstract representation of an ARFF file but they are completely
  independent from their structure.
  They act as wrappers for the algorithm and it would be a matter of changing
@@ -716,19 +839,18 @@ Types Package
 \begin_layout Standard
 All the code has been clearly documented using Javadoc documentation.
  For a deep understanding of the functioning of each method, please see
- the attached archive file containing the HTML exported documentation.
+ the javadoc folder, containing the HTML exported documentation.
 \end_layout
 
 \begin_layout Standard
 Regarding the additional method we created in order to achieve the results,
  they are all documented in the code and in the documentation, but we will
- mention here two of theme.
- The first one is a method for removing noise from the datasets.
+ mention here one of them.
+ It is a method for removing noise from the datasets.
  It begins at line 143 of it.unibz.algorithms.KMeans.
- It is inspired by Barca, J.C.
- Rumantir, G.
- - A Modified K-means Algorithm for Noise Reduction in Optical Motion Capture
- Data.
+ It is inspired by [Barca, J.C.
+ Rumantir, G.] A Modified K-Means Algorithm for Noise Reduction in Optical
+ Motion Capture Data.
  
 \end_layout
 
@@ -738,7 +860,7 @@ In order to take care of noise, we don’t reduce it before executing the
  On every end of iteration, we try to find out how compact a cluster is.
  If instances inside a cluster overcome the average compactness of the clusters
  in the dataset, this cluster is flagged as noise.
- In modification to the classical K-means algorithm, we try to add an automatic
+ In modification to the classical K-Means algorithm, we try to add an automatic
  determination of the optimum number of clusters we should have.
  A cluster is considered noise if it only has a few instances in it.
  The minimum number of instances in a cluster, or the cluster size, are
@@ -809,10 +931,10 @@ Comparison of the algorithms
 \end_layout
 
 \begin_layout Standard
-Two clustering algorithms - namely the k-means and the DBSCAN - were examined
+Two clustering algorithms - namely the K-Means and the DBSCAN - were examined
  and their clustering performances were compared.
  First of all, in the DBSCAN algorithm the user does not have to specify
- the K value, which drastically affects the outcome in the K-means algorithm.
+ the K value, which drastically affects the outcome in the K-Means algorithm.
  The DBSCAN deals with noise data and outliers.
  On the other hand, the K-Means algorithm is affected by noisy data.
  Additionally, in the DBSCAN the ordering of the points in the database
@@ -829,7 +951,7 @@ K-Means Properties
 \end_layout
 
 \begin_layout Itemize
-Pro: k-means is relatively scalable and efficient in processing large data
+Pro: K-Means is relatively scalable and efficient in processing large data
  sets
 \end_layout
 
@@ -857,12 +979,12 @@ Con: it is sensitive to noise and outlier data points (can influence the
 \end_layout
 
 \begin_layout Subsubsection
-DB-Scan Properties
+DBSCAN Properties
 \end_layout
 
 \begin_layout Itemize
 Pro: it does not force you to choose the number of clusters in the data
- a priori, as opposed to k-means
+ a priori, as opposed to K-Means
 \end_layout
 
 \begin_layout Itemize
@@ -901,8 +1023,8 @@ Benchmarking the algorithms (AMD Phenom 9600 Quad Core 2.6Ghz)
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="4">
 <features tabularvalignment="middle">
-<column alignment="center" valignment="top" width="0">
-<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
 <column alignment="center" valignment="top" width="0">
 <column alignment="center" valignment="top" width="0">
 <row>
@@ -915,29 +1037,29 @@ DataSet Type
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell multirow="3" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-K-Means (20 Clusters, 2 Iterations)
+K-Means (C=20, I=2)
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-K-Means (20 C, 2 I, Noise removal)
+K-Means (C=20, I=2, Noise removal)
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
-DBScan (5 as E, 20 as MinPoints)
+DBScan (E=5, MinPoints=20)
 \end_layout
 
 \end_inset
