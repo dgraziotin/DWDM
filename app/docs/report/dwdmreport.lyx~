@@ -655,7 +655,11 @@ This is for a better separation of concerns.
  architecture of the system.
  It is a personalized version of the MVC pattern because we further separated
  the algorithms from the controller part, putting the non algorithm-related
- code in the gui package anyway.
+ code in the 
+\series bold
+gui
+\series default
+ package anyway.
  
 \series bold
  
@@ -835,14 +839,14 @@ Types Package
 \begin_layout Standard
 All the code has been clearly documented using Javadoc documentation.
  For a deep understanding of the functioning of each method, please see
- the attached archive file containing the HTML exported documentation.
+ the javadoc folder, containing the HTML exported documentation.
 \end_layout
 
 \begin_layout Standard
 Regarding the additional method we created in order to achieve the results,
  they are all documented in the code and in the documentation, but we will
- mention here two of theme.
- The first one is a method for removing noise from the datasets.
+ mention here one of them.
+ It is a method for removing noise from the datasets.
  It begins at line 143 of it.unibz.algorithms.KMeans.
  It is inspired by [Barca, J.C.
  Rumantir, G.] A Modified K-Means Algorithm for Noise Reduction in Optical

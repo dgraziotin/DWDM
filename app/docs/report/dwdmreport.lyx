@@ -939,7 +939,8 @@ Two clustering algorithms - namely the K-Means and the DBSCAN - were examined
  On the other hand, the K-Means algorithm is affected by noisy data.
  Additionally, in the DBSCAN the ordering of the points in the database
  is not so important.
- We found that the DBSCAN algorithm has a superior performance.
+ We found that the DBSCAN algorithm has a superior performance as the dataset
+ size grows.
 \end_layout
 
 \begin_layout Subsection
@@ -1007,7 +1008,7 @@ Pro: it is mostly insensitive to the ordering of the points in the database
 \begin_layout Itemize
 Con: the distance measure in the function for finding neighbours is crucial.
  We used the euclidean distance measure and especially for high-dimensional
- data, this distance metric can be rendered almost useless
+ data
 \end_layout
 
 \begin_layout Itemize
