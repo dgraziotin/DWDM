@@ -187,6 +187,16 @@ status open
 ---- many other
 \end_layout
 
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- src
+\end_layout
+
 \end_inset
 
 
@@ -196,6 +206,7 @@ status open
 dwdmproject.jar is the Java Archive of the program we implemented, the datasets
  sub-folder contains the two datasets on which we tested the application.
  The javadoc subfolder contains the exported documentation of the program.
+ The src subfolder contains the sourcecode of the program.
 \end_layout
 
 \begin_layout Subsection
@@ -231,6 +242,7 @@ Our application is tested and supported for Windows XP and Windows 7.
  functionalities seem working fine anyway.
  There are bigger issues with Gnu/Linux, all related to the graphical implementa
 tion: some functionalities will not run.
+ It has been developed for Java 1.6.
 \end_layout
 
 \begin_layout Subsection
@@ -746,8 +758,9 @@ algorithms
 \series bold
 types
 \series default
- package, in order to have an abstraction of the data that could be loaded
- from any datasource, being it an ARFF file, a CSV, and XML or a Database.
+ package, in order to have an abstraction of the data.
+ The programs modular design allows an easy extension of the recognizable
+ formats, for instance CSV, XML or a Database.
  The Utility class actually contains the method for loading the datasets
  and converting them in objects declared in types package.
 \end_layout

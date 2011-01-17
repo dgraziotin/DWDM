@@ -187,6 +187,16 @@ status open
 ---- many other
 \end_layout
 
+\begin_layout Plain Layout
+
+|
+\end_layout
+
+\begin_layout Plain Layout
+
+-- src
+\end_layout
+
 \end_inset
 
 
@@ -196,6 +206,7 @@ status open
 dwdmproject.jar is the Java Archive of the program we implemented, the datasets
  sub-folder contains the two datasets on which we tested the application.
  The javadoc subfolder contains the exported documentation of the program.
+ The src subfolder contains the sourcecode of the program.
 \end_layout
 
 \begin_layout Subsection
@@ -746,8 +757,9 @@ algorithms
 \series bold
 types
 \series default
- package, in order to have an abstraction of the data that could be loaded
- from any datasource, being it an ARFF file, a CSV, and XML or a Database.
+ package, in order to have an abstraction of the data.
+ The programs modular design allows an easy extension of the recognizable
+ formats, for instance CSV, XML or a Database.
  The Utility class actually contains the method for loading the datasets
  and converting them in objects declared in types package.
 \end_layout
@@ -939,7 +951,8 @@ Two clustering algorithms - namely the K-Means and the DBSCAN - were examined
  On the other hand, the K-Means algorithm is affected by noisy data.
  Additionally, in the DBSCAN the ordering of the points in the database
  is not so important.
- We found that the DBSCAN algorithm has a superior performance.
+ We found that the DBSCAN algorithm has a superior performance as the dataset
+ size grows.
 \end_layout
 
 \begin_layout Subsection
@@ -1007,7 +1020,7 @@ Pro: it is mostly insensitive to the ordering of the points in the database
 \begin_layout Itemize
 Con: the distance measure in the function for finding neighbours is crucial.
  We used the euclidean distance measure and especially for high-dimensional
- data, this distance metric can be rendered almost useless
+ data
 \end_layout
 
 \begin_layout Itemize
